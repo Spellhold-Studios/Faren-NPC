@@ -1,0 +1,1111 @@
+//CONTENTS
+//Romance eligibility script
+//Friendship talk script
+//Romance talk script
+//Rest talk timer setting
+//Talks after rest
+//Non-track talks
+//Floating plot-related talks
+//Romance conflicts
+//Romance discussion if Faren dislikes the PC
+//Post-Vampire dialogue
+//Spawning Seth's runner
+//Commenting about Seth encounter
+//Commenting at Imnesvale Inn
+//Commenting about Halmar, Halmar's death, Linnea's death and telling Brega
+//Phaere Innuendo
+//After Bodhi-napping
+//Faren-initiated flirts
+//String fixer
+
+//Romance eligibility script
+IF
+InParty(Myself)
+Global("FHFarenRomanceActive","GLOBAL",0)
+Global("FHFarenMatch","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenRomanceActive","GLOBAL",1)
+SetGlobal("FHFarenMatch","GLOBAL",1)
+SetGlobal("FHFarenLoveTalk","GLOBAL",1)
+RealSetGlobalTimer("FHFarenTalkTimer","GLOBAL",1000)
+END
+
+//Friendship talk script
+
+IF
+InParty(Myself)
+See(Player1)
+Global("FHFarenFriend","GLOBAL",1)
+!AreaType(DUNGEON)
+!Global("Chapter","GLOBAL",5)
+OR(8)
+Global("FHFarenFriendTalk","GLOBAL",2)
+Global("FHFarenFriendTalk","GLOBAL",4)
+Global("FHFarenFriendTalk","GLOBAL",6)
+Global("FHFarenFriendTalk","GLOBAL",8)
+Global("FHFarenFriendTalk","GLOBAL",10)
+Global("FHFarenFriendTalk","GLOBAL",12)
+Global("FHFarenFriendTalk","GLOBAL",14)
+//Friendtalk 8: triggered at rest
+Global("FHFarenFriendTalk","GLOBAL",18)
+RealGlobalTimerExpired("FHFarenTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//FT1, FT2, FT3, FT4, FT5, FT6, FT7, FT9
+
+IF
+InParty(Myself)
+Global("FHFarenFriend","GLOBAL",1)
+!AreaType(DUNGEON)
+!Global("Chapter","GLOBAL",5)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+CombatCounter(0)
+OR(8)
+Global("FHFarenFriendTalk","GLOBAL",1)
+Global("FHFarenFriendTalk","GLOBAL",3)
+Global("FHFarenFriendTalk","GLOBAL",5)
+Global("FHFarenFriendTalk","GLOBAL",7)
+Global("FHFarenFriendTalk","GLOBAL",9)
+Global("FHFarenFriendTalk","GLOBAL",11)
+Global("FHFarenFriendTalk","GLOBAL",13)
+//Friendtalk 8: triggered at rest
+Global("FHFarenFriendTalk","GLOBAL",17)
+RealGlobalTimerExpired("FHFarenTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+IncrementGlobal("FHFarenFriendTalk","GLOBAL",1)
+END
+
+//Romance talk script
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID) 
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+!See([ENEMY])
+!AreaType(DUNGEON)
+!Global("Chapter","GLOBAL",5)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+OR(17)
+Global("FHFarenLoveTalk","GLOBAL",2)
+Global("FHFarenLoveTalk","GLOBAL",4)
+Global("FHFarenLoveTalk","GLOBAL",6)
+Global("FHFarenLoveTalk","GLOBAL",8)
+Global("FHFarenLoveTalk","GLOBAL",10)
+Global("FHFarenLoveTalk","GLOBAL",12)
+Global("FHFarenLoveTalk","GLOBAL",14)
+Global("FHFarenLoveTalk","GLOBAL",16)
+//LT9: triggered at rest (FHFarenLoveTalk at 18)
+//LT10: triggered at rest (FHFarenLoveTalk at 20)
+Global("FHFarenLoveTalk","GLOBAL",22)
+Global("FHFarenLoveTalk","GLOBAL",24)
+Global("FHFarenLoveTalk","GLOBAL",26)
+Global("FHFarenLoveTalk","GLOBAL",28)
+Global("FHFarenLoveTalk","GLOBAL",30)
+Global("FHFarenLoveTalk","GLOBAL",32)
+Global("FHFarenLoveTalk","GLOBAL",34)
+Global("FHFarenLoveTalk","GLOBAL",36)
+//LT19: triggered at rest (FHFarenLoveTalk at 38)
+Global("FHFarenLoveTalk","GLOBAL",40)
+RealGlobalTimerExpired("FHFarenTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+PlaySong(0)
+PlaySound("fhfmus")
+StartDialogueNoSet(Player1)
+END
+
+//LT1, LT2, LT3, LT4, LT5, LT6, LT7, LT8, LT12, LT13, LT14, LT15, LT16, LT17, LT18, LT20
+
+IF
+InParty(Myself)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+!AreaType(DUNGEON)
+!Global("Chapter","GLOBAL",5)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+OR(16)
+Global("FHFarenLoveTalk","GLOBAL",1)
+Global("FHFarenLoveTalk","GLOBAL",3)
+Global("FHFarenLoveTalk","GLOBAL",5)
+Global("FHFarenLoveTalk","GLOBAL",7)
+Global("FHFarenLoveTalk","GLOBAL",9)
+Global("FHFarenLoveTalk","GLOBAL",11)
+Global("FHFarenLoveTalk","GLOBAL",13)
+Global("FHFarenLoveTalk","GLOBAL",15)
+//Lovetalk 9: triggered at rest (FHFarenLoveTalk at 17)
+//Lovetalk 10: triggered at rest (FHFarenLoveTalk at 19)
+//Lovetalk 11: triggered after rest (FHFarenLoveTalk at 21)
+Global("FHFarenLoveTalk","GLOBAL",23)
+Global("FHFarenLoveTalk","GLOBAL",25)
+Global("FHFarenLoveTalk","GLOBAL",27)
+Global("FHFarenLoveTalk","GLOBAL",29)
+Global("FHFarenLoveTalk","GLOBAL",31)
+Global("FHFarenLoveTalk","GLOBAL",33)
+Global("FHFarenLoveTalk","GLOBAL",35)
+//Lovetalk 19: triggered at rest (FHFarenLoveTalk at 37)
+Global("FHFarenLoveTalk","GLOBAL",39)
+RealGlobalTimerExpired("FHFarenTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+IncrementGlobal("FHFarenLoveTalk","GLOBAL",1)
+END
+
+//Rest talk timer setting
+
+IF
+InParty(Myself)
+Global("DreamTimerStarted","GLOBAL",0)
+THEN
+RESPONSE #100
+RealSetGlobalTimer("DreamTalk","GLOBAL",180)
+SetGlobal("DreamTimerStarted","GLOBAL",1)
+END
+
+//Talks after resting
+
+//Morning after sex: lovetalk track
+
+IF
+InParty(Myself)
+Global("FHFarenLoveTalk","GLOBAL",21)
+Global("FHFarenRomanceActive","GLOBAL",1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+THEN
+RESPONSE #100
+IncrementGlobal("FHFarenLoveTalk","GLOBAL",1)
+END
+
+//Morning after sex: floating talk
+
+IF
+InParty(Myself)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+!AreaType(DUNGEON)
+!Global("Chapter","GLOBAL",5)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("FHFAskSex","GLOBAL",3)
+THEN
+RESPONSE #100
+SetGlobal("FHFAskSex","GLOBAL",4)
+END
+
+IF
+Global("FHFAskSex","GLOBAL",4)
+THEN
+RESPONSE #100
+PlaySong(0)
+PlaySound("fhfmus")
+StartDialogueNoSet(Player1)
+END
+
+//Non-track talks
+
+//Drinking - friendly
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+CheckStatGT(Myself,40,INTOXICATION)
+!Global("Chapter","GLOBAL",5)
+CombatCounter(0)
+Global("FHFarenFriend","GLOBAL",1)
+Global("FHFDrinkFriend","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFDrinkFriend","GLOBAL",1)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("FHFDrinkFriend","GLOBAL",1)
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//Drinking - early romance
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+CheckStatGT(Myself,40,INTOXICATION)
+!Global("Chapter","GLOBAL",5)
+CombatCounter(0)
+Global("FHFarenRomanceActive","GLOBAL",1)
+GlobalLT("FHFarenLoveTalk","GLOBAL",20)
+Global("FHFDrinkEarlyRom","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFDrinkEarlyRom","GLOBAL",1)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+Global("FHFDrinkEarlyRom","GLOBAL",1)
+THEN
+RESPONSE #100
+PlaySong(0)
+PlaySound("fhfmus")
+StartDialogueNoSet(Player1)
+END
+
+//Drinking - late romance
+
+IF
+InParty(Myself)
+See(Player1)
+!Global("Chapter","GLOBAL",5)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+CheckStatGT(Myself,40,INTOXICATION)
+CombatCounter(0)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+GlobalGT("FHFarenLoveTalk","GLOBAL",20)
+Global("FHFDrinkLateRom","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFDrinkLateRom","GLOBAL",1)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+Global("FHFDrinkLateRom","GLOBAL",1)
+THEN
+RESPONSE #100
+PlaySong(0)
+PlaySound("fhfmus")
+StartDialogueNoSet(Player1)
+END
+
+//Floating plot-related talks
+
+IF
+InParty(Myself)
+GlobalLT("FHFarenPlotTalk","GLOBAL",1)
+OR(2)
+GlobalGT("FHFarenFriendTalk","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",1)
+Global("Chapter","GLOBAL",2)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenPlotTalk","GLOBAL",2)
+RealSetGlobalTimer("FHFarenPlotTalkTimer","GLOBAL",500)
+END
+
+IF
+InParty(Myself)
+GlobalLT("FHFarenPlotTalk","GLOBAL",4)
+OR(2)
+GlobalGT("FHFarenFriendTalk","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",1)
+OR(2)
+GlobalGT("WorkingForAran","GLOBAL",0)
+GlobalGT("WorkingForBodhi","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenPlotTalk","GLOBAL",4)
+RealSetGlobalTimer("FHFarenPlotTalkTimer","GLOBAL",1000)
+END
+
+IF
+InParty(Myself)
+GlobalLT("FHFarenPlotTalk","GLOBAL",6)
+OR(2)
+GlobalGT("FHFarenFriendTalk","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",1)
+GlobalGT("AsylumPlot","GLOBAL",4)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenPlotTalk","GLOBAL",6)
+RealSetGlobalTimer("FHFarenPlotTalkTimer","GLOBAL",500)
+END
+
+IF
+InParty(Myself)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+GlobalLT("FHFarenPlotTalk","GLOBAL",8)
+Global("Chapter","GLOBAL",5)
+OR(2)
+GlobalGT("FHFarenFriendTalk","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",1)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenPlotTalk","GLOBAL",8)
+RealSetGlobalTimer("FHFarenPlotTalkTimer","GLOBAL",500)
+END
+
+IF
+InParty(Myself)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+GlobalLT("FHFarenPlotTalk","GLOBAL",10)
+Global("Chapter","GLOBAL",6)
+Global("ElhanFinishedSpeaking","GLOBAL",1)
+AreaCheck("AR2500")
+OR(2)
+GlobalGT("FHFarenFriendTalk","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",1)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenPlotTalk","GLOBAL",10)
+RealSetGlobalTimer("FHFarenPlotTalkTimer","GLOBAL",50)
+END
+
+IF
+InParty(Myself)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+GlobalLT("FHFarenPlotTalk","GLOBAL",12)
+Global("Chapter","GLOBAL",6)
+OR(7)
+AreaCheck("AR0020")
+AreaCheck("AR0300")
+AreaCheck("AR0400")
+AreaCheck("AR0500")
+AreaCheck("AR0700")
+AreaCheck("AR0900")
+AreaCheck("AR1000")
+!Dead("c6bodhi")
+OR(2)
+GlobalGT("FHFarenFriendTalk","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",1)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenPlotTalk","GLOBAL",12)
+RealSetGlobalTimer("FHFarenPlotTalkTimer","GLOBAL",1200)
+END
+
+IF
+InParty(Myself)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+GlobalLT("FHFarenPlotTalk","GLOBAL",14)
+Global("Chapter","GLOBAL",6)
+Dead("c6bodhi")
+OR(2)
+GlobalGT("FHFarenFriendTalk","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",1)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenPlotTalk","GLOBAL",14)
+RealSetGlobalTimer("FHFarenPlotTalkTimer","GLOBAL",1000)
+END
+
+IF
+InParty(Myself)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+GlobalLT("FHFarenPlotTalk","GLOBAL",16)
+AreaCheck("AR2800")
+OR(2)
+GlobalGT("FHFarenFriendTalk","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",1)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenPlotTalk","GLOBAL",16)
+RealSetGlobalTimer("FHFarenPlotTalkTimer","GLOBAL",50)
+END
+
+//Initiating the plot-related talks
+
+//Non-romanced
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+CombatCounter(0)
+!Global("FHFarenRomanceActive","GLOBAL",1)
+!Global("FHFarenRomanceActive","GLOBAL",2)
+Global("FHFarenPlotTalk","GLOBAL",6)
+Global("FHFPlotTalkStart","GLOBAL",0)
+OR(13)
+AreaCheck("AR1600")
+AreaCheck("AR1601")
+AreaCheck("AR1602")
+AreaCheck("AR1603")
+AreaCheck("AR1604")
+AreaCheck("AR1605")
+AreaCheck("AR1606")
+AreaCheck("AR1608")
+AreaCheck("AR1609")
+AreaCheck("AR1610")
+AreaCheck("AR1611")
+AreaCheck("AR1612")
+AreaCheck("AR1613")
+RealGlobalTimerExpired("FHFarenPlotTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+SetGlobal("FHFPlotTalkStart","GLOBAL",1)
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//Romanced
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+CombatCounter(0)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("FHFarenPlotTalk","GLOBAL",6)
+Global("FHFPlotTalkStart","GLOBAL",0)
+OR(13)
+AreaCheck("AR1600")
+AreaCheck("AR1601")
+AreaCheck("AR1602")
+AreaCheck("AR1603")
+AreaCheck("AR1604")
+AreaCheck("AR1605")
+AreaCheck("AR1606")
+AreaCheck("AR1608")
+AreaCheck("AR1609")
+AreaCheck("AR1610")
+AreaCheck("AR1611")
+AreaCheck("AR1612")
+AreaCheck("AR1613")
+RealGlobalTimerExpired("FHFarenPlotTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+SetGlobal("FHFPlotTalkStart","GLOBAL",1)
+PlaySong(0)
+PlaySound("fhfmus")
+StartDialogueNoSet(Player1)
+END
+
+//Non-romanced
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!Global("FHFarenRomanceActive","GLOBAL",1)
+!Global("FHFarenRomanceActive","GLOBAL",2)
+CombatCounter(0)
+Global("FHFarenPlotTalk","GLOBAL",8)
+Global("FHFPlotTalkStart","GLOBAL",0)
+AreaCheck("AR2100")
+!See("udsvir04")
+RealGlobalTimerExpired("FHFarenPlotTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+PlaySong(0)
+SetGlobal("FHFPlotTalkStart","GLOBAL",1)
+StartDialogueNoSet(Player1)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+CombatCounter(0)
+Global("FHFarenPlotTalk","GLOBAL",8)
+Global("FHFPlotTalkStart","GLOBAL",0)
+AreaCheck("AR2100")
+!See("udsvir04")
+RealGlobalTimerExpired("FHFarenPlotTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+PlaySong(0)
+PlaySound("fhfmus")
+SetGlobal("FHFPlotTalkStart","GLOBAL",1)
+StartDialogueNoSet(Player1)
+END
+
+//Non romanced
+
+IF
+InParty(Myself)
+See(Player1)
+InParty(Myself)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!Global("FHFarenRomanceActive","GLOBAL",1)
+!Global("FHFarenRomanceActive","GLOBAL",2)
+Global("FHFPlotTalkStart","GLOBAL",0)
+CombatCounter(0)
+OR(6)
+Global("FHFarenPlotTalk","GLOBAL",2)
+Global("FHFarenPlotTalk","GLOBAL",4)
+Global("FHFarenPlotTalk","GLOBAL",10)
+Global("FHFarenPlotTalk","GLOBAL",12)
+Global("FHFarenPlotTalk","GLOBAL",14)
+Global("FHFarenPlotTalk","GLOBAL",16)
+RealGlobalTimerExpired("FHFarenPlotTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+PlaySong(0)
+SetGlobal("FHFPlotTalkStart","GLOBAL",1)
+StartDialogueNoSet(Player1)
+END
+
+//Romanced
+
+IF
+InParty(Myself)
+See(Player1)
+InParty(Myself)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("FHFPlotTalkStart","GLOBAL",0)
+CombatCounter(0)
+OR(6)
+Global("FHFarenPlotTalk","GLOBAL",2)
+Global("FHFarenPlotTalk","GLOBAL",4)
+Global("FHFarenPlotTalk","GLOBAL",10)
+Global("FHFarenPlotTalk","GLOBAL",12)
+Global("FHFarenPlotTalk","GLOBAL",14)
+Global("FHFarenPlotTalk","GLOBAL",16)
+RealGlobalTimerExpired("FHFarenPlotTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+PlaySong(0)
+PlaySound("fhfmus")
+SetGlobal("FHFPlotTalkStart","GLOBAL",1)
+StartDialogueNoSet(Player1)
+END
+
+//Romance conflicts and auto-kills
+
+//Jaheira
+
+IF
+InParty("Jaheira")
+InParty(Myself)
+GlobalGT("FHFarenLoveTalk","GLOBAL",13)
+Global("FHFarenMatch","GLOBAL",1)
+!Global("FHFarenRomanceActive","GLOBAL",3)
+Global("JaheiraRomanceActive","GLOBAL",1)
+Global("FHFJaheiraConflict","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFJaheiraConflict","GLOBAL",1)
+RealSetGlobalTimer("FHFarenJaheiraConflictTime","GLOBAL",500)
+END
+
+IF
+InParty("FHFRN")
+InParty("Jaheira")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+Global("FHFarenMatch","GLOBAL",1)
+Global("JaheiraMatch","GLOBAL",1)
+!Global("FHFarenRomanceActive","GLOBAL",3)
+!Global("JaheiraRomanceActive","GLOBAL",3)
+RealGlobalTimerExpired("FHFarenJaheiraConflictTime","GLOBAL")
+Global("FHFJaheiraConflict","GLOBAL",1)
+THEN
+RESPONSE #100
+SetGlobal("FHFJaheiraConflict","GLOBAL",2)
+END
+
+IF
+Global("FHFarenMatch","GLOBAL",1)
+!Global("FHFarenRomanceActive","GLOBAL",3)
+RealGlobalTimerExpired("FHFarenJaheiraConflictTime","GLOBAL")
+Global("FHFJaheiraConflict","GLOBAL",2)
+THEN
+RESPONSE #100
+ActionOverride("Jaheira",StartDialogueNoSet("FHFRN"))
+END
+
+//Romance auto-kills
+
+IF
+InParty("FHFRN")
+Global("FHFarenMatch","GLOBAL",1)
+!Global("FHFarenRomanceActive","GLOBAL",3)
+OR(4)
+Global("AerieRomanceActive","GLOBAL",2)
+Global("AnomenRomanceActive","GLOBAL",2)
+Global("JaheiraRomanceActive","GLOBAL",2)
+Global("ViconiaRomanceActive","GLOBAL",2)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenRomanceActive","GLOBAL",3)
+END
+
+//Romance discussion if Faren dislikes the PC
+
+IF
+InParty("FHFRN")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+Global("FHFarenMatch","GLOBAL",1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+!Race(Player1,HUMAN)
+GlobalLT("FHFarenLike","GLOBAL",-2)
+Global("FHFarenDiscussRomance","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenDiscussRomance","GLOBAL",1)
+END
+
+IF
+InParty("FHFRN")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+Global("FHFarenMatch","GLOBAL",1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Race(Player1,HUMAN)
+GlobalLT("FHFarenLike","GLOBAL",-4)
+Global("FHFarenDiscussRomance","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenDiscussRomance","GLOBAL",1)
+END
+
+IF
+Global("FHFarenDiscussRomance","GLOBAL",1)
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//Post-Vampire dialogue
+
+IF
+!InParty(Myself)
+Global("FHFarenVampire","GLOBAL",4)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenVampire","GLOBAL",5)
+StartDialogueNoSet(Player1)
+END
+
+//Spawning Seth's runner
+
+IF
+GlobalTimerExpired("FHFSethArrive","GLOBAL")
+InParty(Myself)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+Global("FHFRunnerSpawn","GLOBAL",0)
+!Global("Chapter","GLOBAL",4)
+!Global("Chapter","GLOBAL",5)
+!Global("Chapter","GLOBAL",7)
+AreaType(OUTDOOR)
+!AreaCheck("AR1100")
+!AreaCheck("AR1300")
+!AreaCheck("AR1900")
+!AreaCheck("AR2500")
+!AreaCheck("AR2600")
+THEN
+RESPONSE #100
+CreateCreatureObjectOffScreen("FHFRUN","FHFRN",0,0,0)
+SetGlobal("FHFRunnerSpawn","GLOBAL",1)
+END
+
+//Commenting about going to find Seth
+
+IF
+InParty("FHFRN")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+!AreaType(DUNGEON)
+!Global("Chapter","GLOBAL",5)
+!Global("FHFAskSex","GLOBAL",3)
+GlobalTimerExpired("FHFSethCommentTimer","GLOBAL")
+Global("FHFSeenSeth","GLOBAL",0)
+Global("FHFSethComment","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFSethComment","GLOBAL",1)
+END
+
+IF
+InParty("FHFRN")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+!AreaType(DUNGEON)
+GlobalTimerExpired("FHFSethCommentTimer","GLOBAL")
+Global("FHFSeenSeth","GLOBAL",0)
+Global("FHFSethComment","GLOBAL",2)
+THEN
+RESPONSE #100
+SetGlobal("FHFSethComment","GLOBAL",3)
+END
+
+//Commenting at Imnesvale Inn
+
+IF
+InParty("FHFRN")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+Global("FHFSethQuest","GLOBAL",1)
+AreaCheck("AR1105")
+Global("FHFInnComment","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFInnComment","GLOBAL",1)
+END
+
+//Commenting after the ritual
+
+IF
+InParty("FHFRN")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+Global("FHFRitual","GLOBAL",4)
+Dead("FHFSETH")
+THEN
+RESPONSE #100
+SetGlobal("FHFSethDead","GLOBAL",1)
+END
+
+IF
+InParty("FHFRN")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+Global("FHFRitual","GLOBAL",5)
+!See("FHFSETH")
+Global("FHFSethDead","GLOBAL",0)
+Global("FHFPostSeth","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFPostSeth","GLOBAL",1)
+END
+
+//Initiating dialogue
+
+IF
+InParty("FHFRN")
+See(Player1)
+OR(5)
+Global("FHFSethComment","GLOBAL",1)
+Global("FHFSethComment","GLOBAL",3)
+Global("FHFInnComment","GLOBAL",1)
+Global("FHFSethDead","GLOBAL",1)
+Global("FHFPostSeth","GLOBAL",1)
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//Commenting about Halmar
+
+IF
+InParty("FHFRN")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!Dead("FHFHAL")
+Global("FHFHalFaren","GLOBAL",2)
+Global("FHFLinJob","GLOBAL",0)
+Global("FHFTellBrega","GLOBAL",0)
+Global("FHFHalComment","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFHalComment","GLOBAL",1)
+END
+
+//Commenting upon Halmar's death
+
+IF
+InParty("FHFRN")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Dead("FHFHAL")
+Global("FHFHalDeathComment","GLOBAL",0)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFHalDeathComment","GLOBAL",1)
+END
+
+//Commenting upon Linnea's death
+
+IF
+InParty("FHFRN")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Dead("FHFLIN")
+Global("FHFLinDeathComment","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFLinDeathComment","GLOBAL",1)
+END
+
+//Commenting upon telling Brega
+
+IF
+InParty("FHFRN")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("FHFTellBrega","GLOBAL",1)
+Global("FHFBregaComment","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFBregaComment","GLOBAL",1)
+END
+
+IF
+InParty("FHFRN")
+See(Player1)
+OR(4)
+Global("FHFHalComment","GLOBAL",1)
+Global("FHFBregaComment","GLOBAL",1)
+Global("FHFHalDeathComment","GLOBAL",1)
+Global("FHFLinDeathComment","GLOBAL",1)
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//Dying upon leaving to get Seth
+
+IF
+Global("FHFarenLeaveSeth","GLOBAL",1)
+Global("FHFKill","GLOBAL",0)
+AreaCheck("AR1100")
+THEN
+RESPONSE #100
+SetGlobal("FHFKill","GLOBAL",1)
+Kill(Myself)
+END
+
+//Phaere Innuendo
+
+IF
+InParty("FHFRN")
+See(Player1)
+CombatCounter(0)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+Global("FHFarenMatch","GLOBAL",1)
+!Global("FHFarenRomanceActive","GLOBAL",3)
+Global("PhaereInnuendo","GLOBAL",1)
+Global("FHFPhaereInnuendoTalk","GLOBAL",0)
+AreaCheck("AR2200")
+THEN
+RESPONSE #100
+SetGlobal("FHFPhaereInnuendoTalk","GLOBAL",1)
+END
+
+IF
+InParty("FHFRN")
+See(Player1)
+CombatCounter(0)
+OR(2)
+Global("PhaereInnuendo","GLOBAL",2)
+Global("PhaereInnuendo","GLOBAL",3)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+Global("FHFarenMatch","GLOBAL",1)
+!Global("FHFarenRomanceActive","GLOBAL",3)
+Global("FHFPhaereSleep","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFPhaereSleep","GLOBAL",1)
+END
+
+IF
+InParty("FHFRN")
+See(Player1)
+OR(2)
+Global("FHFPhaereInnuendoTalk","GLOBAL",1)
+Global("FHFPhaereSleep","GLOBAL",1)
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//After Bodhi-napping
+
+IF
+InParty(Myself)
+Global("FHFPostVampire","GLOBAL",0)
+Global("FHFarenVampire","GLOBAL",6)
+THEN
+RESPONSE #100
+RealSetGlobalTimer("FHFPostVampireTimer","GLOBAL",1000)
+SetGlobal("FHFPostVampire","GLOBAL",1)
+END
+
+IF
+InParty(Myself)
+Global("FHFarenRomanceActive","GLOBAL",2)
+!AreaType(DUNGEON)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+Global("FHFPostVampire","GLOBAL",1)
+RealGlobalTimerExpired("FHFPostVampireTimer","GLOBAL")
+THEN
+RESPONSE #100
+IncrementGlobal("FHFPostVampire","GLOBAL",1)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+Global("FHFPostVampire","GLOBAL",2)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+!AreaType(DUNGEON)
+RealGlobalTimerExpired("FHFPostVampireTimer","GLOBAL")
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//Faren-initiated flirts
+
+//Starting the flirt timer
+
+IF
+InParty(Myself)
+Global("FHFFlirtCounter","GLOBAL",0)
+Global("FHFarenMatch","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",13)
+THEN
+RESPONSE #100
+SetGlobal("FHFFlirtCounter","GLOBAL",1)
+RealSetGlobalTimer("FHFFlirtTimer","GLOBAL",1000)
+END
+
+IF
+InParty(Myself)
+Global("FHFFlirtCounter2","GLOBAL",0)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("FHFUncommit","GLOBAL",1)
+THEN
+RESPONSE #100
+SetGlobal("FHFFlirtCounter2","GLOBAL",1)
+RealSetGlobalTimer("FHFFlirtTimer","GLOBAL",1000)
+END
+
+//Initiating flirts
+
+IF
+InParty(Myself)
+RealGlobalTimerExpired("FHFFlirtTimer","GLOBAL")
+Global("FHFFlirtsDisabled","GLOBAL",0)
+Global("FHFStartFlirt","GLOBAL",0)
+!Global("FHFarenRomanceActive","GLOBAL",3)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!AreaType(DUNGEON)
+!Global("Chapter","GLOBAL",5)
+CombatCounter(0)
+!See([ENEMY])
+THEN
+RESPONSE #100
+SetGlobal("FHFStartFlirt","GLOBAL",1)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!AreaType(DUNGEON)
+CombatCounter(0)
+!See([ENEMY])
+Global("FHFStartFlirt","GLOBAL",1)
+!Global("Chapter","GLOBAL",5)
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//String fixer
+
+IF
+HotKey(L)
+THEN
+RESPONSE #100
+StartCutSceneMode()
+StartCutScene("fhffix")
+END

@@ -1,0 +1,97 @@
+//Seth's override script
+
+//Intro dialogue
+
+IF
+Global("FHFSeenSeth","GLOBAL",0)
+See("FHFRN")
+InParty("FHFRN")
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+THEN
+RESPONSE #100
+SetGlobal("FHFSeenSeth","GLOBAL",1)
+END
+
+IF
+Global("FHFSeenSeth","GLOBAL",1)
+THEN
+RESPONSE #100
+StartDialogueNoSet(Player1)
+END
+
+//After performing the ritual
+
+IF
+Global("FHFRitual","GLOBAL",3)
+Dead("FHFARA")
+Dead("FHFJES")
+THEN
+RESPONSE #100
+SetGlobal("FHFRitual","GLOBAL",4)
+END
+
+IF
+Global("FHFRitual","GLOBAL",4)
+THEN
+RESPONSE #100
+StartDialogueNoSet(Player1)
+END
+
+//Dying when failing the encounter
+
+IF
+Global("FHFarenLeaveSeth","GLOBAL",1)
+Global("FHFKill","GLOBAL",1)
+THEN
+RESPONSE #100
+SetGlobal("FHFKill","GLOBAL",2)
+Kill(Myself)
+END
+
+//Combat script
+
+IF
+Global("FHFRitual","GLOBAL",3)
+OR(2)
+See("FHFJES")
+See("FHFARA")
+HaveSpell(CLERIC_DRAW_UPON_HOLY_MIGHT)
+THEN
+RESPONSE #100
+Spell(Myself,CLERIC_DRAW_UPON_HOLY_MIGHT)
+END
+
+IF
+See(NearestEnemyOf(Myself))
+THEN
+RESPONSE #100
+Attack(NearestEnemyOf(Myself))
+END
+
+IF
+See("FHFJES")
+Global("FHFRitual","GLOBAL",3)
+THEN
+RESPONSE #100
+Attack("FHFJES")
+END
+
+IF
+OR(2)
+Dead("FHFJES")
+!See("FHFJES")
+Global("FHFRitual","GLOBAL",3)
+THEN
+RESPONSE #100
+Attack("FHFARA")
+END
+
+IF
+Global("FHFRitual","GLOBAL",3)
+HaveSpellRES("SPPR214")
+HPPercentLT("FHFRN",75)
+THEN
+RESPONSE #100
+SpellRES("SPPR214","FHFRN")
+END
+

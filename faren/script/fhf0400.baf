@@ -1,0 +1,25 @@
+//Appending to the Slums to spawn Halmar and his guards
+
+IF
+Global("FHFHalSpawn","AR0400",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFHalSpawn","AR0400",1)
+CreateCreature("FHFHAL",[2589.965],3)
+END
+
+IF
+Global("FHFHalgSpawn1","AR0400",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFHalgSpawn1","AR0400",1)
+CreateCreature("FHFG1",[2615.973],4)
+END
+
+IF
+Global("FHFHalgSpawn2","AR0400",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFHalgSpawn2","AR0400",1)
+CreateCreature("FHFG2",[2563.935],1)
+END

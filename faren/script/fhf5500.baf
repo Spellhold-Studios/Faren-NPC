@@ -1,0 +1,9 @@
+//Appending to Amkethran to spawn Nadiyya
+
+IF
+Global("FHFNadiyyaSpawn","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNadiyyaSpawn","GLOBAL",1)
+CreateCreature("FHFNA25",[2346.2199],3)
+END

@@ -1,0 +1,57 @@
+//Cooper's script
+
+//Initial meeting script
+
+IF
+InMyArea("Cernd")
+!InParty("Cernd")
+Global("CerndWentHunting","GLOBAL",0)
+Global("FHFarenCernd","GLOBAL",0)
+Range([PC],5)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenCernd","GLOBAL",1)
+StartDialogueNoSet(Player1)
+END
+
+IF
+OR(3)
+!InMyArea("Cernd")
+InParty("Cernd")
+!Global("CerndWentHunting","GLOBAL",0)
+Global("FHFarenCernd","GLOBAL",0)
+Global("FHFarenCooper","GLOBAL",0)
+Range([PC],5)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenCooper","GLOBAL",1)
+StartDialogueNoSet(Player1)
+END
+
+IF
+GlobalTimerExpired("FHFFarenFreeTime","GLOBAL")
+Global("FHFarenFree","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenFree","GLOBAL",1)
+END
+
+IF
+OR(2)
+Global("FHFarenCooper","GLOBAL",1)
+Global("FHFarenFree","GLOBAL",1)
+Range([PC],10)
+THEN
+RESPONSE #100
+StartDialogueNoSet(Player1)
+END
+
+
+//Leaving when Faren is freed
+
+IF
+Global("FHFarenFree","GLOBAL",2)
+THEN
+RESPONSE #100
+EscapeArea()
+END

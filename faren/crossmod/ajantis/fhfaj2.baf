@@ -1,0 +1,17 @@
+//Conflict: engaged
+
+IF
+InParty("FHFRN")
+InParty("C#Ajantis")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+!StateCheck("C#Ajantis",CD_STATE_NOTVALID)
+OR(3)
+Global("FHFAjanConflict1","GLOBAL",1)
+Global("FHFAjanConflict2","GLOBAL",1)
+Global("FHFAjanConflict3","GLOBAL",1)
+THEN
+RESPONSE #100
+StartDialogueNoSet(Player1)
+END

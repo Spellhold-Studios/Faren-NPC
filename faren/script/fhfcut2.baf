@@ -1,0 +1,17 @@
+//Seth's ritual cutscene
+
+IF
+True()
+THEN
+RESPONSE #100
+CutSceneId(Player1)
+CreateVisualEffect("SPMETSWA",[312.1316])
+CreateVisualEffect("SPMETSWA",[225.1329])
+CreateVisualEffect("SPFLESHS",[312.1316])
+CreateVisualEffect("SPFLESHS",[225.1329])
+Wait(1)
+CreateCreature("fhfjes",[312.1316],14)
+CreateCreature("fhfara",[225.1329],14)
+Wait(1)
+ActionOverride("FHFSETH",StartDialogueNoSet(Player1)
+END

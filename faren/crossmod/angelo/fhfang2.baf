@@ -1,0 +1,31 @@
+IF
+InParty("FHFRN")
+InParty("ADAngel")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("ADAngel",CD_STATE_NOTVALID)
+Global("ADAngelRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFAngConflictTimerSet2","GLOBAL",1)
+RealGlobalTimerExpired("FHFAngConflictTimer","GLOBAL")
+Global("FHFAngConflict2","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFAngConflict2","GLOBAL",1)
+END
+
+IF
+InParty("FHFRN")
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("FHFAngConflict2","GLOBAL",1)
+THEN
+RESPONSE #100
+StartDialogueNoSet(Player1)
+END

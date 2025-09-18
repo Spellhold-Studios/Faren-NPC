@@ -1,0 +1,95 @@
+//Appended to Trademeet jail script
+
+//Closing Faren's cell door
+
+IF
+Global("FHFJailChanges","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFJailChanges","GLOBAL",1)
+CloseDoor("DOOR05")
+END
+
+IF
+Global("FHFarenFree","GLOBAL",1)
+Global("FHFUnlockDoor","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFUnlockDoor","GLOBAL",1)
+OpenDoor("DOOR05")
+END
+
+//Spawning Faren. Note different levels depending on party experience
+
+//Faren at 110000 XP
+
+IF
+Global("FHFarenExists","AR2009",0)
+XPLT(Player1,150000)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenlvl9","GLOBAL",1)
+SetGlobal("FHFarenExists","AR2009",1)
+CreateCreature("FHFRN9",[513.139],2)
+END
+
+//Faren at 225000 XP
+
+IF
+Global("FHFarenExists","AR2009",0)
+XPGT(Player1,149999)
+XPLT(Player1,250000)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenlvl11","GLOBAL",1)
+SetGlobal("FHFarenExists","AR2009",1)
+CreateCreature("FHFRN11",[513.139],2)
+END
+
+//Faren at 450000 XP
+
+IF
+Global("FHFarenExists","AR2009",0)
+XPGT(Player1,249999)
+XPLT(Player1,500000)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenlvl12","GLOBAL",1)
+SetGlobal("FHFarenExists","AR2009",1)
+CreateCreature("FHFRN12",[513.139],2)
+END
+
+//Faren at 675000 XP
+
+IF
+Global("FHFarenExists","AR2009",0)
+XPGT(Player1,499999)
+XPLT(Player1,750000)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenlvl13","GLOBAL",1)
+SetGlobal("FHFarenExists","AR2009",1)
+CreateCreature("FHFRN13",[513.139],2)
+END
+
+//Faren at 900000 XP
+
+IF
+Global("FHFarenExists","AR2009",0)
+XPGT(Player1,749999)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenlvl14","GLOBAL",1)
+SetGlobal("FHFarenExists","AR2009",1)
+CreateCreature("FHFRN14",[513.139],2)
+END
+
+//Spawning Cooper
+
+IF
+Global("FHFCooperExists","AR2009",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFCooperExists","AR2009",1)
+CreateCreature("FHFCOOP",[420.228],11)
+END

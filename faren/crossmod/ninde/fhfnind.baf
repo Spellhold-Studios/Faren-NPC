@@ -1,0 +1,86 @@
+//Conflict talk 1:
+
+IF
+InParty("FHFRN")
+InParty("Ninde")
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("LK#NindeRomanceActive","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",12)
+Global("FHFNindeConflictTimerSet1","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNindeConflictTimerSet1","GLOBAL",1)
+RealSetGlobalTimer("FHFNindeConflictTimer","GLOBAL",200)
+END
+
+IF
+InParty("FHFRN")
+InParty("Ninde")
+See("Ninde")
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Ninde",CD_STATE_NOTVALID)
+Global("LK#NindeRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",1)
+RealGlobalTimerExpired("FHFNindeConflictTimer","GLOBAL")
+Global("FHFNindeConflictTimerSet1","GLOBAL",1)
+Global("FHFNindeConflict1","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNindeConflict1","GLOBAL",1)
+END
+
+//Conflict talk 2
+
+IF
+InParty("FHFRN")
+InParty("Ninde")
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("LK#NindeRomanceActive","GLOBAL",1)
+GlobalGT("LK#NindeLoveTalks","GLOBAL",17)
+Global("FHFNindeConflictTimerSet2","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNindeConflictTimerSet2","GLOBAL",1)
+RealSetGlobalTimer("FHFNindeConflictTimer","GLOBAL",500)
+END
+
+IF
+InParty("FHFRN")
+InParty("Ninde")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Ninde",CD_STATE_NOTVALID)
+Global("LK#NindeRomanceActive","GLOBAL",1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("FHFNindeConflictTimerSet2","GLOBAL",1)
+RealGlobalTimerExpired("FHFNindeConflictTimer","GLOBAL")
+Global("FHFNindeConflict2","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNindeConflict2","GLOBAL",1)
+END
+
+//Initiating talks
+
+IF
+InParty("FHFRN")
+InParty("Ninde")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Ninde",CD_STATE_NOTVALID)
+Global("FHFNindeConflict2","GLOBAL",1)
+THEN
+RESPONSE #100
+StartDialogueNoSet(Player1)
+END

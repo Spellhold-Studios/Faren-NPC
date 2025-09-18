@@ -1,0 +1,15 @@
+@0    = ~So you are a mercenary. Am I right?~
+@1    = ~Heh, if I was, I'd be a pretty poor one - pigs'll fly the day <CHARNAME> actually pays me for my services.~
+@2    = ~Er, that came out a little wrong. I meant, fighting services, not--~
+@3    = ~So you don't have a goal? No one to guide you, help you get where you wish to go?~
+@4    = ~Hey, hey, I didn't say that. <CHARNAME>'s been as good a guide as any - and, well, if we get through all this, I guess I'll figure out something then.~
+@5    = ~But how can you be so sure that <PRO_HISHER> guidance is worth listening to? For all you know, <PRO_HESHE> could have some...other motive in keeping you around.~
+@6    = ~Okay, that's it. You want to make your comments about my <PRO_GIRLBOY>, we can take this somewhere where <PRO_HESHE> won't be able to stop me--~
+@7    = ~No - no, I didn't mean it like that.~
+@8    = ~Sure sounded like it to me.~
+@9    = ~Look. I will not threaten "your <PRO_GIRLBOY>" - not unless <PRO_HESHE> gives me cause.~
+@10   = ~Fine.~
+@11   = ~Well, sometimes <PRO_HESHE>'s got a few too many bats in <PRO_HISHER> belfry, but most of the time what <PRO_HESHE> says makes sense.~
+@12   = ~You should try listening to <PRO_HIMHER> sometime. Might give you food for thought.~
+@13   = ~Perhaps. It still seems a strange way to live, though.~
+@14   = ~Strange, maybe, but it's mine.~

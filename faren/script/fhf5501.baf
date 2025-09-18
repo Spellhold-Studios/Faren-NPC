@@ -1,0 +1,10 @@
+//Appending to Amkethran Tavern to spawn Nadiyya a second time
+
+IF
+Global("FHFNadiyya","GLOBAL",4)
+Global("FHFNadiyyaSpawn2","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNadiyyaSpawn2","GLOBAL",1)
+CreateCreature("FHFNA25",[408.416],3)
+END

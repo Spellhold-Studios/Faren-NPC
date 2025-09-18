@@ -1,0 +1,48 @@
+//Conflict talk 1
+
+IF
+InParty("FHFRN")
+InParty("K#Sarah")
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("SarahRomanceActive","GLOBAL",1)
+Global("SarahTalkRomance","GLOBAL",3)
+Global("FHFSarahConflictTimerSet1","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFSarahConflictTimerSet1","GLOBAL",1)
+RealSetGlobalTimer("FHFSarahConflictTimer","GLOBAL",200)
+END
+
+IF
+InParty("FHFRN")
+InParty("K#Sarah")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("SarahRomanceActive","GLOBAL",1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+RealGlobalTimerExpired("FHFSarahConflictTimer","GLOBAL")
+Global("FHFSarahConflictTimerSet1","GLOBAL",1)
+Global("FHFSarahConflict","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFSarahConflict","GLOBAL",1)
+END
+
+//Initiating talks
+
+IF
+InParty("FHFRN")
+InParty("K#Sarah")
+See(Player1)
+Global("FHFSarahConflict","GLOBAL",1)
+THEN
+RESPONSE #100
+StartDialogueNoSet(Player1)
+END

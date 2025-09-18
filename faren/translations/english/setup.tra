@@ -1,0 +1,170 @@
+@0    = ~Faren NPC for Baldur's Gate II~
+@1    = ~Bag of Marbles~
+@2    = ~This is a small bag of marbles made of a glass-like substance and are coloured pale blue-white. Though at first glance they look mundane, and Faren has a habit of practising his sleight of hand with them, they seem to swirl as you look at them. When held up in battle, they glow with an eerie light which dazzles enemies.
+
+STATISTICS:
+
+Special Abilities: Confusion 3 times/day
+
+Not usable by:
+ Wizard Slayers~
+@3    = ~Faren's Body~
+@4    = ~Faren was captured by Bodhi and infected with vampirism, forcing you to slay him. There may be some way to revive him, though you don't know what it would be.~
+@5    = ~Linnea's Necklace~
+@6    = ~This necklace belonged to Linnea Belka, a woman who used to work for the Amnish government in some capacity.~
+@7    = ~This necklace belonged to Linnea Belka, a woman who used to work for the Amnish government in some capacity.
+
+STATISTICS:
+
+Special Abilities: Bless 3 times/day~
+@8    = ~Linnea's Head~
+@9    = ~This is the head of Linnea Belka, whom Faren's former employer Halmar hired you to kill.~
+@10   = ~<CHARNAME>'s Boots~
+@11   = ~Faren bought these boots for <CHARNAME>. He felt they wouldn't be that welcome a present without an enchantment 'baked' into them, and wanted <CHARNAME> to be able to protect <PRO_HISHER>self better when Faren wasn't able to help.
+
+STATISTICS:
+
+Special Abilities: Protection from Magical Weapons once per day.~
+@12   = ~Felix~
+@13   = ~This is Felix, a ferret Faren bought from a street vendor. Felix may be a little tubby for a ferret on the road, but he is kind of cute. From the way he sits in his pack while you're on the move, Felix is obviously attached to Faren.~
+@14   = ~Faren~
+@15   = ~Militia Soldier~
+@16   = ~Seth~
+@17   = ~Jessalyn~
+@18   = ~Araden~
+@19   = ~Halmar~
+@20   = ~Ruffian~
+@21   = ~Linnea~
+@22   = ~Runner~
+@23   = ~When he parted ways with <CHARNAME>, Faren found himself drifting once again. After all, what adventure could live up to the thrill of journeying with a destiny-bound Bhaalspawn? He travelled for a time, running errands for townsfolk, but he was so rich and powerful that he found himself in a peculiar position: the world at his fingertips with no idea what to grab. He eventually came to Waterdeep and set up an adventuring bar, the Pickled Stoat, proclaiming that one and all could enjoy his hospitality regardless of activities or beliefs. Here he spent many years, with growing renown. However, he never lost his nose for trouble. One afternoon the Waterdeep militia came to investigate the bar on suspicion of shady dealings, only to find Faren gone and the building emptied of all its considerable valuables. Though the guards interviewed all of the bar's patrons they could find, no answer was forthcoming - though for years afterwards stories were told of a strikingly similar man heading an adventuring party whose travels spanned the length and breadth of Faerun.~
+@24   = ~Though it must be said that Faren enjoyed basking in <CHARNAME>'s reflected glory, he always treated <PRO_HIMHER> with unabashed, sometimes teasing, affection. Together they journeyed and as they did so, their reputations grew and grew - not least due to Faren's insistence on telling everyone they met about <CHARNAME>'s exploits and his part in them. In typically unromantic fashion, Faren proposed they settle down together just after a particularly bloody battle with a red dragon, figuring that "we've got enough money to have mansions up and down the Sword Coast". Though the stories of <CHARNAME> do not relate whether <PRO_HESHE> took Faren up on the mansion proposition, they agree on two things: that Faren and <CHARNAME> were a force to be reckoned with throughout the Realms, and that Faren remained with <CHARNAME> until the end.~
+@25   = ~Faren did not take <CHARNAME>'s ascension well. Though he remembered <PRO_HIMHER> with a smile, <CHARNAME> had given him something more than just <PRO_HISHER> love: a purpose. Though he had the world at his fingertips, he had no idea what to grab, and he found himself drifting once again. He eventually came to Waterdeep to set up an adventurers' bar, the Pickled Stoat. Proclaiming that all could enjoy his hospitality regardless of activities or beliefs, his one rule was that if one patron badmouthed the god <CHARNAME>, they were out on their ear. Here he spent many years, with growing renown, and never quite lost his nose for trouble. When the Waterdeep militia came to investigate the bar on suspicion of shady dealings, they found Faren gone and the building emptied of its considerable valuables. Though the guards interviewed the bar's patrons, no explanation was forthcoming. Faren turned up in Neverwinter claiming he'd left during a pub crawl that had got out of hand - and, needless to say, he had watertight alibis. Faren then headed an adventuring party whose journeys spanned the length and breadth of Faerun. He never forgot <CHARNAME>, and would tell everyone who cared to listen - and many who didn't - about <CHARNAME>'s deeds. His stories would inevitably end "...and you know what - <PRO_HESHE> was mighty fine!"~
+@26   = ~Martial configuration~
+@27   = ~Choose Faren's weapon proficiency skillset~
+@28   = ~Please install Faren before proficiencies~
+@29   = ~Hey. Hey, Cernd. Are you asleep? Can you hear me?~
+@30   = ~I've had enough of this!~ [FHFSS1]
+@31   = ~You know what? This is actually pretty fun.~ [FHFSS2]
+@32   = ~This may not be a democracy, but I have a couple of suggestions about what we could be doing...~ [FHFSS3]
+@33   = ~It may just be me, but is anyone else having an awful time?~ [FHFSS4]
+@34   = ~Right, I've had enough. You can shove it, I'm out of here.~ [FHFSS5]
+@35   = ~Does this mean I've got to go out in front?~ [FHFSS6]
+@36   = ~We've got to sleep sometime...haven't we?~ [FHFSS7]
+@37   = ~Prison or here. Prison or here. Tough call.~ [FHFSS8]
+@38   = ~You want a fight, you've got one!~ [FHFSS9]
+@39   = ~Win or die!~ [FHFSS10]
+@40   = ~You're not taking me down!~ [FHFSS11]
+@41   = ~You picked the wrong time to start a fight!~ [FHFSS12]
+@42   = ~Let's get this finished!~ [FHFSS13]
+
+
+@45   = ~I - I need some help!~ [FHFSS16]
+@46   = ~Oh, was that a rabbit? Damn, now I'm hungry.~ [FHFSS17]
+@47   = ~Lots of undesirables round here. Don't worry, I've got your back.~ [FHFSS18]
+@48   = ~These places always make me nervous.~ [FHFSS19]
+@49   = ~Heh, I wonder what we're going to get up to today?~ [FHFSS20]
+@50   = ~Not to be a downer or anything, but are we going to get some sleep?~ [FHFSS21]
+@51   = ~Yep?~ [FHFSS22]
+@52   = ~You got something to say?~
+@53   = ~What do you want?~ [FHFSS24]
+@54   = ~Hey there.~ [FHFSS25]
+@55   = ~Less talk, more action.~
+@56   = ~Go ahead, point the way.~
+@57   = ~No need to worry, I'm on it.~
+@58   = ~Got you.~
+@59   = ~Not if you're going to be bossy about it.~ [FHFSS30]
+@60   = ~Well, I don't have any better ideas.~ [FHFSS31]
+@61   = ~Guess there's not much else to do.~
+@62   = ~You're in charge.~ [FHFSS33]
+@63   = ~Sure thing.~ [FHFSS34]
+@64   = ~You're pretty damn persistent, aren't you?~ [FHFSS35]
+@65   = ~Faren's the name, Faren's the game.~ [FHFSS36]
+@66   = ~Got you, you bastard!~ [FHFSS37]
+@67   = ~Bugger!~ [FHFSS38]
+@68   = ~Got a toothpick? Might do more than this.~ [FHFSS39]
+@69   = ~Come on, I'm carrying enough as it is.~ [FHFSS40]
+
+@71   = ~They won't even know it's missing.~
+@72   = ~Damn, where was I?~ [FHFSS41]
+@73   = ~There we go. Now, anyone who steps on that deserves whatever they get.~ [FHFSS42]
+@74   = ~Not this again!~
+@75   = ~When asked about his past, FAREN gives you a mock-suspicious glare and says blithely that there is little to tell.  Hailing from Trademeet, east of Athkatla, he worked for the town militia when he was younger.  After leaving this job - an event he recalls somewhat ruefully - he travelled to Luskan with a group of adventurers, with whom he made close friends.  He is glad to be back on the road, saying he gets itchy feet if he stays still for too long, and despite his laid-back approach to life he seems happiest when wading into action.~
+@76   = ~Rogue configuration~
+@77   = ~You got something to say?~ [FHFSS23]
+@78   = ~Less talk, more action.~ [FHFSS26]
+@79   = ~Go ahead, point the way.~ [FHFSS27]
+@80   = ~No need to worry, I'm on it.~ [FHFSS28]
+@81   = ~Got you.~ [FHFSS29]
+@82   = ~Guess there's not much else to do.~ [FHFSS32]
+@83   = ~They won't even know it's missing.~ [FHFSS41]
+@84   = ~Damn, where was I?~ [FHFSS42]
+@85   = ~There we go. Now, anyone who steps on that deserves whatever they get.~ [FHFSS43]
+@86   = ~Not this again!~ [FHFSS44]
+@87   = ~Ajantis Content~
+@88   = ~Crossmod Content~
+@89   = ~Please install Faren before extra content~
+@90   = ~You do not appear to have Ajantis installed~
+@91   = ~Amber Content (Shadows of Amn content only)~
+@92   = ~You do not appear to have Amber installed~
+@93   = ~Angelo Content~
+@94   = ~You do not appear to have Angelo installed~
+@95   = ~Auren Aseph Content~
+@96   = ~You do not appear to have Auren Aseph installed~
+@97   = ~Chloe Content (Shadows of Amn content only)~
+@98   = ~You do not appear to have Chloe installed~
+@99   = ~de'Arnise Romance Content (Shadows of Amn content only)~
+@100  = ~You do not appear to have de'Arnise Romance installed~
+@101  = ~Edwin Romance Content (Shadows of Amn content only)~
+@102  = ~You do not appear to have the Edwin Romance installed~
+@103  = ~Fade Content~
+@104  = ~You do not appear to have Fade installed~
+@105  = ~Iylos Content~
+@106  = ~You do not appear to have Iylos installed~
+@107  = ~Kelsey Content~
+@108  = ~You do not appear to have Kelsey installed~
+@109  = ~Keto Content (Shadows of Amn content only)~
+@110  = ~You do not appear to have Keto installed~
+@111  = ~Luxley Family Content (Shadows of Amn content only)~
+@112  = ~You do not appear to have the Luxley Family installed~
+@113  = ~Nathaniel Content~
+@114  = ~You do not appear to have Nathaniel installed~
+@115  = ~Ninde Content~
+@116  = ~You do not appear to have Ninde installed~
+@117  = ~Romantic Encounters Content (can be installed before or after Romantic Encounters)~
+@118  = ~Saerileth Content~
+@119  = ~You do not appear to have Saerileth installed~
+@120  = ~Sarah Content~
+@121  = ~You do not appear to have Sarah installed~
+@122  = ~Solaufein Content~
+@123  = ~You do not appear to have Solaufein installed~
+@124  = ~Tsujatha Content~
+@125  = ~You do not appear to have Tsujatha installed~
+@126  = ~Xan Content~
+@127  = ~You do not appear to have Xan installed~
+@128  = ~Xulaye Content~
+@129  = ~You do not appear to have Xulaye installed~
+@130  = ~Yasraena Content~
+@131  = ~You do not appear to have Yasraena installed~
+@132  = ~v3~
+@133  = ~Cat~
+@134  = ~This is a cat which Faren rescued after the destruction of Saradush. She is a wary creature, but seems to enjoy curling up in the warmth of Faren's pack.~
+@135  = ~Nadiyya~
+@138  = ~What do you want?~ [FHFSS24]
+@140  = ~Arath Content~
+@141  = ~You do not appear to have Arath installed~
+@142  = ~Branwen Content~
+@143  = ~You do not appear to have Branwen installed~
+@144  = ~Coran Content~
+@145  = ~You do not appear to have Coran installed~
+@146  = ~Dace Linton Content~
+@147  = ~You do not appear to have Dace installed~
+@148  = ~Darian Content~
+@149  = ~You do not appear to have Darian installed~
+@150  = ~Isra Content~
+@151  = ~You do not appear to have Isra installed~
+@152  = ~Tashia Content~
+@153  = ~You do not appear to have Tashia installed~
+@154  = ~Tiax Content~
+@155  = ~You do not appear to have Tiax installed~
+@156  = ~Yeslick Content (Shadows of Amn content only)~
+@157  = ~You do not appear to have Yeslick installed~

@@ -1,0 +1,48 @@
+//Controlling Faren's epilogue screen at the end of ToB
+
+//No romance, In Which Faren Starts A Bar
+
+IF
+Global("StartEndBios","AR6200",1)
+!Global("FHFarenRomanceActive","GLOBAL",2)
+InParty("FHFRN")
+Global("FHFBio","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFBio","GLOBAL",1)
+TextScreen("fhfrn01")
+SmallWait(1)
+Continue()
+END
+
+//Non-ascended romance, In Which Charname and Faren Are Sappy
+
+IF
+Global("StartEndBios","AR6200",1)
+InParty("FHFRN")
+Global("PlayerChoseEssence","GLOBAL",0)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("FHFBio","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFBio","GLOBAL",1)
+TextScreen("fhfrn02")
+SmallWait(1)
+Continue()
+END
+
+//Ascended romance, In Which Faren Is Sad But Not Angsty
+
+IF
+Global("StartEndBios","AR6200",1)
+InParty("FHFRN")
+Global("PlayerChoseEssence","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("FHFBio","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFBio","GLOBAL",1)
+TextScreen("fhfrn03")
+SmallWait(1)
+Continue()
+END

@@ -1,0 +1,9 @@
+//Appended to Bodhi's lair to spawn Vamp!Faren
+
+IF
+  Global("FHFarenVampire","GLOBAL",1)
+THEN
+  RESPONSE #100
+    SetGlobal("FHFarenVampire","GLOBAL",2)
+    CreateCreature("fhfvamp",[1473.332],2)
+END

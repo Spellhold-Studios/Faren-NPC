@@ -1,0 +1,39 @@
+//Banters
+
+CHAIN IF ~InParty("FHFRN")
+See("FHFRN")
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("FHFYas1","GLOBAL",0)~ THEN BYASRAEN FHFYas1
+@0
+DO ~SetGlobal("FHFYas1","GLOBAL",1)~
+== BFHFRN @1
+== BYASRAEN @2
+== BFHFRN @3
+== BYASRAEN @4
+EXIT
+
+CHAIN IF ~InParty("FHFRN")
+See("FHFRN")
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("FHFYas2","GLOBAL",0)~ THEN BYASRAEN FHFYas2
+@5
+DO ~SetGlobal("FHFYas2","GLOBAL",1)~
+== BFHFRN @6
+== BYASRAEN @7
+== BFHFRN @8
+= @9
+EXIT
+
+CHAIN IF ~InParty("FHFRN")
+See("FHFRN")
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("FHFYas3","GLOBAL",0)~ THEN BYASRAEN FHFYas3
+@10
+DO ~SetGlobal("FHFYas3","GLOBAL",1)~
+== BFHFRN @11
+== BYASRAEN @12
+== BFHFRN @13
+EXIT

@@ -1,0 +1,13 @@
+//Initiating dialogue
+
+IF
+InParty("FHFRN")
+InParty("Tsujath")
+See(Player1)
+OR(2)
+Global("FHFTsuConflict1","GLOBAL",1)
+Global("FHFTsuConflict2","GLOBAL",1)
+THEN
+RESPONSE #100
+StartDialogueNoSet(Player1)
+END

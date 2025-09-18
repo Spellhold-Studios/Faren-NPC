@@ -1,0 +1,52 @@
+//Conflict talk 1:
+
+IF
+InParty("FHFRN")
+InParty("E3FADE")
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("E3FadeRomanceActive","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",13)
+Global("FHFFadeConflictTimerSet1","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFFadeConflictTimerSet1","GLOBAL",1)
+RealSetGlobalTimer("FHFFadeConflictTimer","GLOBAL",200)
+END
+
+IF
+InParty("FHFRN")
+InParty("E3FADE")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("E3FADE",CD_STATE_NOTVALID)
+Global("E3FadeRomanceActive","GLOBAL",1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+RealGlobalTimerExpired("FHFFadeConflictTimer","GLOBAL")
+Global("FHFFadeConflictTimerSet1","GLOBAL",1)
+Global("FHFFadeConflict1","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFFadeConflict1","GLOBAL",1)
+END
+
+//Initiating talk
+
+IF
+InParty("FHFRN")
+InParty("E3FADE")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+!StateCheck("E3FADE",CD_STATE_NOTVALID)
+Global("FHFFadeConflict1","GLOBAL",1)
+THEN
+RESPONSE #100
+StartDialogueNoSet(Player1)
+END

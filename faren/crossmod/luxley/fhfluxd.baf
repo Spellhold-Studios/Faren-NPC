@@ -1,0 +1,17 @@
+//Sebastian drunken talk
+
+IF
+InParty(Myself)
+InMyArea("FHLSEB")
+!StateCheck("FHLSEB",CD_STATE_NOTVALID)
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+CombatCounter(0)
+!AreaType(DUNGEON)
+RealGlobalTimerExpired("DreamTalk","GLOBAL")
+Global("FHFSebNightTalk","GLOBAL",0)
+THEN
+RESPONSE #100
+RealSetGlobalTimer("DreamTalk","GLOBAL",180)
+SetGlobal("FHFSebNightTalk","GLOBAL",1)
+Interact(Player1)
+END

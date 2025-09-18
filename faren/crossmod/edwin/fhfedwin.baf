@@ -1,0 +1,52 @@
+//Romance conflict
+
+IF
+InParty("FHFRN")
+InParty("Edwin")
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("EdwinRomanceActive","GLOBAL",1)
+Global("FHFEdwinRom","GLOBAL",1)
+Global("FHFEdwinConflictTimerSet1","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFEdwinConflictTimerSet1","GLOBAL",1)
+RealSetGlobalTimer("FHFEdwinConflictTimer","GLOBAL",200)
+END
+
+IF
+InParty("FHFRN")
+InParty("Edwin")
+See("Edwin")
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Edwin",CD_STATE_NOTVALID)
+Global("EdwinRomanceActive","GLOBAL",1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+RealGlobalTimerExpired("FHFEdwinConflictTimer","GLOBAL")
+Global("FHFEdwinConflictTimerSet1","GLOBAL",1)
+Global("FHFEdwinConflict1","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFEdwinConflict1","GLOBAL",1)
+END
+
+//Initiating talk
+
+IF
+InParty("FHFRN")
+InParty("Edwin")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Edwin",CD_STATE_NOTVALID)
+Global("FHFEdwinConflict1","GLOBAL",1)
+THEN
+RESPONSE #100
+StartDialogueNoSet(Player1)
+END

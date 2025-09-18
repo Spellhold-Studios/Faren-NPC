@@ -1,0 +1,90 @@
+//Conflict talk 1:
+
+IF
+InParty("FHFRN")
+InParty("J#Kelsey")
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("J#KelseyRomanceActive","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",13)
+Global("FHFKelsConflictTimerSet1","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFKelsConflictTimerSet1","GLOBAL",1)
+RealSetGlobalTimer("FHFKelsConflictTimer","GLOBAL",200)
+END
+
+IF
+InParty("FHFRN")
+InParty("J#Kelsey")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("J#Kelsey",CD_STATE_NOTVALID)
+Global("J#KelseyRomanceActive","GLOBAL",1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+RealGlobalTimerExpired("FHFKelsConflictTimer","GLOBAL")
+Global("FHFKelsConflictTimerSet1","GLOBAL",1)
+Global("FHFKelsConflict1","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFKelsConflict1","GLOBAL",1)
+END
+
+//Conflict talk 2
+
+IF
+InParty("FHFRN")
+InParty("J#Kelsey")
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("J#KelseyRomanceActive","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",22)
+Global("FHFKelsConflictTimerSet2","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFKelsConflictTimerSet2","GLOBAL",1)
+RealSetGlobalTimer("FHFKelsConflictTimer","GLOBAL",500)
+END
+
+IF
+InParty("FHFRN")
+InParty("J#Kelsey")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("J#Kelsey",CD_STATE_NOTVALID)
+Global("J#KelseyRomanceActive","GLOBAL",1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("FHFKelsConflictTimerSet2","GLOBAL",1)
+RealGlobalTimerExpired("FHFKelsConflictTimer","GLOBAL")
+Global("FHFKelsConflict2","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFKelsConflict2","GLOBAL",1)
+END
+
+//Initiating talks
+
+IF
+InParty("FHFRN")
+InParty("J#Kelsey")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("J#Kelsey",CD_STATE_NOTVALID)
+Global("FHFKelsConflict1","GLOBAL",1)
+THEN
+RESPONSE #100
+StartDialogueNoSet(Player1)
+END

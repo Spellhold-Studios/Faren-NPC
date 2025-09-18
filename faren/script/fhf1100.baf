@@ -1,0 +1,10 @@
+//Appended to Umar Hills to spawn Seth
+
+IF
+Global("FHFSethQuest","GLOBAL",2)
+Global("FHFSethSpawn","AR1100",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFSethSpawn","AR1100",1)
+CreateCreature("FHFSETH",[281.1399],1)
+END

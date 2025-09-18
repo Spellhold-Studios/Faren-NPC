@@ -1,0 +1,87 @@
+@0    = ~Would ye be Faren Blacknall, sir?~
+@1    = ~I would, yeah. You got something for me?~
+@2    = ~That's right. A message from a...Seth? Friend o' yours. Says he wishes to meet ye in the Imnesvale inn.~
+@3    = ~...right. So what's he want?~
+@4    = ~Sorry, nothin' more than that. If ye don't mind me sayin', he seemed a bit touched. I'll be seein' ye, sir.~
+@5    = ~Okay. Okay, <CHARNAME>, we have to get there, or he might've done something - I don't know, weird.~
+@6    = ~All right, Faren. We'll go and see him as soon as we can.~
+@7    = ~Keep your hair on, we'll get there in time. I have other things to sort out as well.~
+@8    = ~Absolutely not. I'm not wasting my time with this errand.~
+@9    = ~Good. Okay, let's carry on. This whole thing's making me antsy.~
+@10   = ~Faren's meeting with Seth
+
+Faren has received word from an old adventuring companion of his, a man named Seth, who wishes to meet with him in the Imnesvale inn. Though Faren looks much his usual self, he seems concerned about the matter.~
+@11   = ~Come on, <CHARNAME>, this is important! I've been helping you out with all your stuff--~
+@12   = ~Very well, then. We'll go and find Seth when I have the time.~
+@13   = ~No. I can't afford to get distracted by everything that comes along.~
+@14   = ~Oh, so when your friend gets kidnapped it's important, but when my friend needs my help it's a distraction?~
+@15   = ~You know what? You can shove it. I'm out of here.~
+@16   = ~Ye're travellin' with Faren Blacknall, <PRO_SIRMAAM>?~
+@17   = ~I've a message from a...Seth? Friend o' his. Says he wishes to meet Mr Blacknall in the Imnesvale inn.~
+@18   = ~If ye don't mind me sayin', <PRO_SIRMAAM>, he seemed a bit touched. Ye should probably make haste.~
+@19   = ~Have you seen a man named Seth around here, lately?~
+@20   = ~Hmmmm... I do recall a chap of that name. A couple of days ago, now, maybe...~
+@21   = ~Yer memory's goin' bad, Vince. Oy, was he a sullen chappie with hair down to his shoulders? One o' them elves?~
+@22   = ~That's it, that's the guy - do you know where he went?~
+@23   = ~He were a bit what ye'd call peculiar, and he said he wanted ter 'make things better again'. So he--~
+@24   = ~I'm tellin' the story here, boy! He headed up to the hills, up near that cabin in the northwest. Ye should find him there.~
+@25   = ~Okay. <CHARNAME>, we should head over and see what he's up to. I don't like the sound of this...~
+@26   = ~Faren's meeting with Seth
+
+After travelling to the Imnesvale inn, it seems that Seth moved to the hills a short way northwest of the main village. Faren seems to think we should hurry, as Seth may be up to something unwise.~
+@27   = ~Come on, come on, I don't have endless time! Where's Faren? He has to see this!~
+@28   = ~There you are, there you are! Come on, the ritual is almost ready!~
+@29   = ~Seth, what the hell are you doing here? Last time I heard...~
+@30   = ~Think again, Faren! I've been travelling. I've found out a lot of things.~
+@31   = ~H-his eyes are terribly wide, aren't they? I think there might be something - you know - a bit wrong with him!~
+@32   = ~Found out things? Like what, exactly?~
+@33   = ~Like how to bring Araden and Jessalyn back.~
+@34   = ~Don't look at me like that, you know you want to see them as much as I do!~
+@35   = ~But - they were ripped apart! There's nothing that'd bring them back after that.~
+@36   = ~...no. You're kidding. That's necromancy - evil magics! That's what you used to fight against!~
+@37   = ~We all change, Faren. You know that. So, are you with me or not?~
+@38   = ~If this elf speaks the truth, he is tangled in an insidious evil. It is our duty to prevent such a ritual from taking place.~
+@39   = ~Filthy magics indeed. I want no part in this, and I'd advise you to steer clear of it.~
+@40   = ~I can't believe you're saying this! No, I'm not with you, and <CHARNAME> isn't either, are you?~
+@41   = ~I agree with Faren. I think trying to raise these people is a bad idea.~
+@42   = ~Who says I'm not with you? I think this could be an interesting experiment.~
+@43   = ~Why wouldn't you want your friends to be with you again, Faren?~
+@44   = ~What?! But this is my work...my life!~
+@45   = ~<CHARNAME>, what do you think you're doing?~
+@46   = ~It will certainly be intriguing to see what this elf has up his skinny sleeve. (He could not possibly understand the magnitude of his discovery, but I, yes, I may be able to turn it to my advantage...)~
+@47   = ~Because he's scared of the truth, that's why!~
+@48   = ~No, damn it, I've gotten over the fact that they're gone, that's all. Which this fool obviously hasn't!~
+@49   = ~Your vision is clouded. You know in your heart of hearts that you would rather they were alive!~
+@50   = ~Well, yes, of course I do, but that doesn't change anything.~
+@51   = ~But now it can. Don't you see?~
+@52   = ~C'mon, Seth, you listen to us and we can--~
+@53   = ~"Us"! Oh, so it's "us" now! The old friends weren't good enough, were they, so you had to find some new ones?~
+@54   = ~No matter. It's about to begin!~
+@55   = ~Erm, this isn't right. Faren, they didn't use to look like that, did they?~
+@56   = ~Chlchlchl...~
+@57   = ~No, of course they didn't!~
+@58   = ~Kchssss...~
+@59   = ~You IDIOT! You've done something - get out of the way, damn it, and let me and <CHARNAME> deal with it!~
+@60   = ~...That wasn't supposed to happen.~
+@61   = ~Of course it wasn't. Seth, go to the Temple of Waukeen in Trademeet. They'll be able to give you a decent meal and sort you out.~
+@62   = ~I...suppose that would be a good idea. There isn't really...anywhere else I can go.~
+@63   = ~That's the spirit. Go on, we'll probably be along to see how you are.~
+@64   = ~All...all right.~
+@65   = ~Faren's meeting with Seth
+
+As it turned out, Seth wanted to resurrect the rest of their group with dark magics! The ritual went badly, and Seth raised a couple of revenants which I was able to dispatch. Seth has now headed to the Temple of Waukeen in Trademeet to recover.~
+@66   = ~That...that wasn't supposed to happen! Oh, what have I done?!~
+@67   = ~Farewell, <CHARNAME>. Maybe I'll see you again, under better circumstances.~
+@68   = ~Faren's meeting with Seth
+
+As it turned out, Seth wanted to resurrect the rest of their group with dark magics! The ritual went badly, and Seth raised a couple of revenants which I was able to dispatch.~
+@69   = ~...Hello.~
+@70   = ~How are you feeling now?~
+@71   = ~They gave me some soup, and told me to go and read some wholesome books. I'm not sure I want to go that far, but I'm feeling a bit better.~
+@72   = ~Good!~
+@73   = ~Faren? I still miss them, you know.~
+@74   = ~...I know.~
+@75   = ~Well, I'll see you around, I suppose.~
+@76   = ~Yeah. Take care, Seth.~
+@77   = ~Take care, Faren. I hope you find what you want out in the world.~
+@78   = ~Say hello to Faren if you see him, won't you?~

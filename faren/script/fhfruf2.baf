@@ -1,0 +1,12 @@
+//Halmar's guard override script
+//Ensure hostility when Halmar is attacked
+
+IF
+OR(2)
+Global("FHFHalAttacked","GLOBAL",1)
+Global("FHFHalEnemy","GLOBAL",1)
+!Allegiance(Myself,ENEMY)
+THEN
+RESPONSE #100
+Enemy()
+END

@@ -1,0 +1,1390 @@
+BACKUP ~Faren/backup~
+AUTHOR ~http://www.spellholdstudios.net~
+VERSION @132
+
+README ~Faren/FarenReadme.html~
+
+// Translations
+AUTO_TRA ~Faren/translations/%s~
+
+LANGUAGE ~English~
+         ~english~
+         ~Faren/translations/english/setup.tra~
+
+//LANGUAGE ~English~ ~English~ ~Faren/english/Setup-Faren.tra~
+
+BEGIN @0
+
+//Audio and music
+COPY ~Faren/Music~ ~music~
+
+COPY_EXISTING ~songlist.2da~ ~override~
+SET_2DA_ENTRY 0 2 3 ~fhfblank.MUS~
+
+//Unpacking audio
+
+LAF HANDLE_AUDIO END
+
+//Adding CamDawg's customised dialogue validity state
+
+APPEND ~STATE.IDS~ ~0x80101FEF CD_STATE_NOTVALID~
+UNLESS ~CD_STATE_NOTVALID~
+
+//Giving Imoen a banter file if the Fixpack isn't installed
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~cdbehbla.pro~ //makes sure the fixpack isn't already installed
+THEN BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~saradush.mve~ THEN BEGIN
+  COPY_EXISTING ~interdia.2da~ ~override~
+    SET_2DA_ENTRY 17 1 2 ~BIMOEN2~ // fixes ToB version
+    BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+  APPEND ~interdia.2da~ ~IMOEN       BIMOEN2~ // fixes SoA version
+    UNLESS ~BIMOEN2~
+END
+END
+
+//Sorting out broken ids and adding gametimes - thanks to the Fixpack
+
+INCLUDE ~Faren/lib/fhfids.tph~
+INCLUDE ~Faren/lib/fhftimes.tph~
+
+//Force WeiDU to reload altered IDS files
+CLEAR_IDS_MAP
+
+//Copying graphics
+ACTION_IF GAME_IS ~bg2ee~ BEGIN
+COPY ~Faren/graphics/ee~ ~override~
+END ELSE BEGIN
+COPY ~Faren/graphics/bg2~ ~override~
+END
+
+//Copying item files
+
+COPY ~Faren/items/fhfmarb.itm~ ~override~
+SAY NAME1 @1
+SAY NAME2 @1
+SAY DESC @2
+
+COPY ~Faren/items/fhfbody.itm~ ~override~
+SAY NAME1 @3
+SAY NAME2 @3
+SAY DESC @4
+
+COPY ~Faren/items/fhfamul.itm~ ~override~
+SAY NAME1 @5
+SAY NAME2 @5
+SAY UNIDENTIFIED_DESC @6
+SAY DESC @7
+
+COPY ~Faren/items/fhfhead.itm~ ~override~
+SAY NAME1 @8
+SAY NAME2 @8
+SAY DESC @9
+
+COPY ~Faren/items/fhfboot.itm~ ~override~
+SAY NAME1 @10
+SAY NAME2 @10
+SAY DESC @11
+
+COPY ~Faren/items/fhffel.itm~ ~override~
+SAY NAME1 @12
+SAY NAME2 @12
+SAY DESC @13
+
+//Making Faren's cell door in Trademeet jail locked and openable when Logan gives permission (adapted from Amber's tp2)
+
+COPY_EXISTING ~ar2009.are~ ~override~
+  WRITE_ASCII 0x94 ~AR2009~
+  READ_LONG 0xa4 "door_num"
+  READ_LONG 0xa8 "door_off"
+  WHILE ("%door_num%" > 0) BEGIN
+    SET "door_num" = ("%door_num%" - 1)
+    READ_BYTE  ("%door_off%" + 0x28 + ("%door_num%" * 0xc8)) "locked"
+    READ_ASCII ("%door_off%" + 0x20 + ("%door_num%" * 0xc8)) "doorname"
+    PATCH_IF ("%doorname%" STRING_COMPARE_CASE "DOOR05" = 0) BEGIN
+      WRITE_BYTE  ("%door_off%" + 0x28 + ("%door_num%" * 0xc8)) ("%locked%" BOR 0b01000010) // sets locked and openable bits
+      WRITE_LONG ("%door_off%" + 0x8c + ("%door_num%" * 0xc8)) 100 // sets lock difficulty
+    END
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+//Copying creature files
+
+//Vampirised Faren
+
+COPY ~Faren/creatures/fhfvamp.cre~ ~override~
+SAY NAME1 @14
+SAY NAME2 @14
+ADD_CRE_ITEM ~VAMPREG~ #0 #0 #0 ~IDENTIFIED~ ~LRING~
+ADD_CRE_ITEM ~FHFBODY~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
+WRITE_ASCII 0x248 ~FHFVAMP~ #8 // override
+WRITE_ASCII 0x2cc ~FHFVAMP~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFVAMP~ #32 //DV
+WRITE_ASCII 0X34 ~FHFS~ #8 //small portrait
+WRITE_ASCII 0x3c ~FHFM~ #8 //big portrait
+
+//Non-joinable NPC: Cooper
+
+COPY ~Faren/creatures/fhfcoop.cre~ ~override~
+SAY NAME1 @15
+SAY NAME2 @15
+WRITE_ASCII 0x248 ~FHFCOOP~ #8 // override
+WRITE_ASCII 0x2cc ~FHFCOOP~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFCOOP~ #32 //DV
+
+//Non-joinable NPC: Seth
+
+COPY ~Faren/creatures/fhfseth.cre~ ~override~
+SAY NAME1 @16
+SAY NAME2 @16
+WRITE_ASCII 0x248 ~FHFSETH~ #8 // override
+WRITE_ASCII 0x2cc ~FHFSETH~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFSETH~ #32 //DV
+ADD_CRE_ITEM ~RING09~ #0 #0 #0 ~IDENTIFIED~ ~LRING~
+
+//Non-joinable NPC: Jessalyn
+
+COPY ~Faren/creatures/fhfjes.cre~ ~override~
+SAY NAME1 @17
+SAY NAME2 @17
+WRITE_ASCII 0x2cc ~FHFJES~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFJES~ #32 //DV
+
+//Non-joinable NPC: Araden
+
+COPY ~Faren/creatures/fhfara.cre~ ~override~
+SAY NAME1 @18
+SAY NAME2 @18
+WRITE_ASCII 0x2cc ~FHFARA~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFARA~ #32 //DV
+
+//Non-joinable NPC: Halmar
+
+COPY ~Faren/creatures/fhfhal.cre~ ~override~
+SAY NAME1 @19
+SAY NAME2 @19
+ADD_CRE_ITEM ~AMUL14~ #0 #0 #0 ~NONE~ ~AMULET~
+ADD_CRE_ITEM ~POTN52~ #3 #0 #0 ~IDENTIFIED~ ~INV1~
+ADD_CRE_ITEM ~RNDTRE04~ #0 #0 #0 ~NONE~ ~INV6~
+WRITE_ASCII 0x248 ~FHFHAL~ #8 // override
+WRITE_ASCII 0x2cc ~FHFHAL~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFHAL~ #32 //DV
+
+//Non-joinable NPC: Halmar's guards
+
+COPY ~Faren/creatures/fhfg1.cre~ ~override~
+SAY NAME1 @20
+SAY NAME2 @20
+WRITE_ASCII 0x248 ~FHFRUF1~ #8 // override
+WRITE_ASCII 0x2cc ~FHFRUF1~ #8 // dialogue
+SAY BATTLE_CRY1 #61886
+SAY SELECT_COMMON1 #61883
+SAY SELECT_COMMON2 #61884
+SAY DAMAGE #61888
+SAY DYING #61889
+
+COPY ~Faren/creatures/fhfg2.cre~ ~override~
+SAY NAME1 @20
+SAY NAME2 @20
+WRITE_ASCII 0x248 ~FHFRUF2~ #8 // override
+WRITE_ASCII 0x2cc ~FHFRUF2~ #8 // dialogue
+
+//Non-joinable NPC: Linnea
+
+COPY ~Faren/creatures/fhflin.cre~ ~override~
+SAY NAME1 @21
+SAY NAME2 @21
+ADD_CRE_ITEM ~FHFAMUL~ #0 #0 #0 ~NONE~ ~INV1~
+ADD_CRE_ITEM ~RNDTRE04~ #0 #0 #0 ~NONE~ ~INV6~
+ADD_CRE_ITEM ~FHFHEAD~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
+WRITE_ASCII 0x248 ~FHFLIN~ #8 // override
+WRITE_ASCII 0x2cc ~FHFLIN~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFLIN~ #32 //DV
+
+//Non-joinable NPC: Runner
+COPY ~Faren/creatures/fhfrun.cre~ ~override~
+SAY NAME1 @22
+SAY NAME2 @22
+WRITE_ASCII 0x248 ~FHFRUN~ #8 // override
+WRITE_ASCII 0x2cc ~FHFRUN~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFRUN~ #32 //DV
+
+//Compiling dialogues and scripts
+
+LOAD_TRA ~Faren/translations/%LANGUAGE%/journals.tra~
+
+COMPILE ~Faren/script/fhffix.baf~                          //Faren dialogue fixer
+        ~Faren/script/fhfrn.baf~                           //Faren's script
+        ~Faren/script/fhfrnd.baf~                          //Faren's dream script for nighttime talks
+        ~Faren/script/fhfcut1.baf~                         //Faren's kidnap cutscene
+        ~Faren/script/fhfcut2.baf~                         //Ritual cutscene
+        ~Faren/script/fhfvamp.baf~                         //Faren's vampire script
+        ~Faren/script/fhfhal.baf~                          //Halmar's script
+        ~Faren/script/fhfruf1.baf~                         //Halmar's guards' scripts
+        ~Faren/script/fhfruf2.baf~
+        ~Faren/script/fhflin.baf~                          //Linnea's script
+        ~Faren/script/fhfseth.baf~                         //Seth's script
+        ~Faren/script/fhfrun.baf~                          //Runner's script
+        ~Faren/script/fhfcoop.baf~                         //Cooper's script
+
+        ~Faren/dialogues/BFHFRN.d~                         //Unscripted banter
+        ~Faren/dialogues/FHFRN.d~                          //Joining dialogue
+        ~Faren/dialogues/FHFRNJ.d~                         //Scripted dialogue and interjections
+        ~Faren/dialogues/FHFRNP.d~                         //Parting dialogue
+        ~Faren/dialogues/FHFQ.d~                           //Quest dialogue
+        ~Faren/dialogues/FHFSETH.d~                        //Seth dialogue
+
+//Extending scripts
+
+EXTEND_BOTTOM ~AR0400.bcs~ ~Faren/script/fhf0400.baf~
+EXTEND_BOTTOM ~AR0809.bcs~ ~Faren/script/fhf0809.baf~
+EXTEND_BOTTOM ~AR1002.bcs~ ~Faren/script/fhf1002.baf~
+EXTEND_BOTTOM ~AR1100.bcs~ ~Faren/script/fhf1100.baf~
+EXTEND_BOTTOM ~AR2009.bcs~ ~Faren/script/fhf2009.baf~
+EXTEND_BOTTOM ~Aerie.bcs~ ~Faren/script/fhfaerie.baf~
+EXTEND_BOTTOM ~BODHIAMB.bcs~ ~Faren/script/fhfbodia.baf~
+EXTEND_BOTTOM ~CLEANSE.bcs~ ~Faren/script/fhfclean.baf~
+EXTEND_BOTTOM ~VAMPAMB.bcs~ ~Faren/script/vampamb.baf~
+
+ADD_JOURNAL EXISTING TITLE (#74337) @3001 @3002 @5 USING ~Faren/translations/%LANGUAGE%/journals.tra~ ~Faren/translations/%LANGUAGE%/fhfrnp.tra~
+ADD_JOURNAL @65 @68 @3003 @3000 @1455 USING ~Faren/translations/%LANGUAGE%/fhfseth.tra~ ~Faren/translations/%LANGUAGE%/journals.tra~ ~Faren/translations/%LANGUAGE%/fhfrnj.tra~
+ADD_JOURNAL @44 @46 @61 @62 @63 @123 @134 @136 USING ~Faren/translations/%LANGUAGE%/fhfq.tra~
+
+//ToB
+
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+
+COMPILE ~Faren/dialogues/FHF25.d~
+        ~Faren/dialogues/FHF25J.d~
+        ~Faren/dialogues/FHF25P.d~
+        ~Faren/dialogues/BFHF25.d~
+		~Faren/dialogues/fhfna25.d~
+        ~Faren/script/fhf25.baf~
+        ~Faren/script/fhfCut3.baf~
+        ~Faren/script/fhf25D.baf~
+		~Faren/script/fhfna25S.baf~
+		~Faren/script/fhfct251.baf~
+
+//Extending scripts
+
+EXTEND_BOTTOM ~AR5500.bcs~ ~Faren/script/fhf5500.baf~
+EXTEND_BOTTOM ~AR5501.bcs~ ~Faren/script/fhf5501.baf~
+
+COPY ~Faren/items/fhfcat.itm~ ~override~
+SAY NAME1 @133
+SAY NAME2 @133
+SAY DESC @134
+
+COPY ~Faren/creatures/fhflove.cre~ ~override~
+SAY NAME1 @17
+SAY NAME2 @17
+WRITE_ASCII 0x2cc ~FHFLOVE~ #8 //dialogue
+WRITE_ASCII 0x280 ~FHFLOVE~ #32 //DV
+
+COPY ~Faren/creatures/fhfna25.cre~ ~override/fhfna25.cre~
+SAY NAME1 @135
+SAY NAME2 @135
+WRITE_ASCII 0x248 ~FHFNA25S~ #8 // override
+WRITE_ASCII 0x2cc ~FHFNA25~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFNA25~ #32 //DV
+
+EXTEND_BOTTOM ~Cut218g.bcs~ ~Faren/script/fhf218.baf~
+EXTEND_TOP ~AR6200.bcs~ ~Faren/script/fhf6200.baf~
+
+COPY ~Faren/epilogue/fhfrnep.2da~ ~override/fhfrn01.2da~
+REPLACE ~99999~ @23
+COPY ~Faren/epilogue/fhfrnep.2da~ ~override/fhfrn02.2da~
+REPLACE ~99999~ @24
+COPY ~Faren/epilogue/fhfrnep.2da~ ~override/fhfrn03.2da~
+REPLACE ~99999~ @25
+
+// Baldur's Gate 2: Enhanced Edition NPC content
+
+ACTION_IF GAME_IS ~BG2EE~ BEGIN
+COMPILE	~Faren/dialogues/FHFEE.d~
+EXTEND_BOTTOM ~Dorn.bcs~ ~Faren/script/fhfdorn.baf~
+EXTEND_BOTTOM ~FHFRN.bcs~ ~Faren/script/fhfhex.baf~
+EXTEND_BOTTOM ~Neera.bcs~ ~Faren/script/fhfneera.baf~
+EXTEND_BOTTOM ~Rasaad.bcs~ ~Faren/script/fhfras.baf~
+END
+
+END
+
+//Appending to ingame dialogue files
+
+APPEND ~interdia.2da~ ~FHFRN     BFHFRN      BFHF25~
+UNLESS ~FHFRN~
+
+APPEND ~pdialog.2da~ ~FHFRN      FHFRNP           FHFRNJ          FHFRND       FHF25P           FHF25J              FHF25D              FHF25~
+UNLESS ~FHFRN~
+
+BEGIN @26
+FORCED_SUBCOMPONENT @27
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @28
+
+COPY ~Faren/creatures/mfrn9.cre~ ~override/fhfrn9.cre~
+ADD_CRE_ITEM ~LEAT05~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+ADD_CRE_ITEM ~sw1H08~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+ADD_CRE_ITEM ~FHFMARB~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
+ADD_CRE_ITEM ~POTN52~ #3 #0 #0 ~IDENTIFIED~ ~QITEM2~
+SAY NAME1 @14
+SAY NAME2 @14
+SAY INITIAL_MEETING @29
+SAY MORALE @30
+SAY HAPPY @31
+SAY UNHAPPY_ANNOYED @32
+SAY UNHAPPY_SERIOUS @33
+SAY UNHAPPY_BREAKING @34
+SAY LEADER @35
+SAY TIRED @36
+SAY BORED @37
+SAY BATTLE_CRY1 @38
+SAY BATTLE_CRY2 @39
+SAY BATTLE_CRY3 @40
+SAY BATTLE_CRY4 @41
+SAY BATTLE_CRY5 @42
+SAY DAMAGE ~~ [FHFSS14]
+SAY DYING ~~ [FHFSS15]
+SAY HURT @45
+SAY AREA_FOREST @46
+SAY AREA_CITY @47
+SAY AREA_DUNGEON @48
+SAY AREA_DAY @49
+SAY AREA_NIGHT @50
+SAY SELECT_COMMON1 @51
+SAY SELECT_COMMON2 @52
+SAY SELECT_COMMON3 @138
+SAY SELECT_COMMON4 @54
+SAY SELECT_COMMON5 @55
+SAY SELECT_COMMON6 @56
+SAY SELECT_ACTION1 @57
+SAY SELECT_ACTION2 @58
+SAY SELECT_ACTION3 @59
+SAY SELECT_ACTION4 @60
+SAY SELECT_ACTION5 @61
+SAY SELECT_ACTION6 @62
+SAY SELECT_ACTION7 @63
+SAY SELECT_RARE1 @64
+SAY SELECT_RARE2 @65
+SAY CRITICAL_HIT @66
+SAY CRITICAL_MISS @67
+SAY TARGET_IMMUNE @68
+SAY INVENTORY_FULL @69
+SAY HIDDEN_IN_SHADOWS ~~
+SAY PICKED_POCKET @71
+SAY SPELL_DISRUPTED @72
+SAY SET_A_TRAP @73
+SAY REACT_TO_DIE_GENERAL @74
+SAY BIO @75
+WRITE_ASCII 0x248 ~FHFRN~ #8 // override
+WRITE_ASCII 0x2cc ~FHFRN~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFRN~ #32 //DV
+WRITE_ASCII 0X34 ~FHFS~ #8 //small portrait
+WRITE_ASCII 0x3c ~FHFM~ #8 //big portrait
+
+COPY ~Faren/creatures/mfrn11.cre~ ~override/fhfrn11.cre~
+ADD_CRE_ITEM ~LEAT05~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+ADD_CRE_ITEM ~sw1H08~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+ADD_CRE_ITEM ~FHFMARB~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
+ADD_CRE_ITEM ~POTN52~ #3 #0 #0 ~IDENTIFIED~ ~QITEM2~
+SAY NAME1 @14
+SAY NAME2 @14
+SAY INITIAL_MEETING ~~
+SAY MORALE @30
+SAY HAPPY @31
+SAY UNHAPPY_ANNOYED @32
+SAY UNHAPPY_SERIOUS @33
+SAY UNHAPPY_BREAKING @34
+SAY LEADER @35
+SAY TIRED @36
+SAY BORED @37
+SAY BATTLE_CRY1 @38
+SAY BATTLE_CRY2 @39
+SAY BATTLE_CRY3 @40
+SAY BATTLE_CRY4 @41
+SAY BATTLE_CRY5 @42
+SAY DAMAGE ~~ [FHFSS14]
+SAY DYING ~~ [FHFSS15]
+SAY HURT @45
+SAY AREA_FOREST @46
+SAY AREA_CITY @47
+SAY AREA_DUNGEON @48
+SAY AREA_DAY @49
+SAY AREA_NIGHT @50
+SAY SELECT_COMMON1 @51
+SAY SELECT_COMMON2 @52
+SAY SELECT_COMMON3 @138
+SAY SELECT_COMMON4 @54
+SAY SELECT_COMMON5 @55
+SAY SELECT_COMMON6 @56
+SAY SELECT_ACTION1 @57
+SAY SELECT_ACTION2 @58
+SAY SELECT_ACTION3 @59
+SAY SELECT_ACTION4 @60
+SAY SELECT_ACTION5 @61
+SAY SELECT_ACTION6 @62
+SAY SELECT_ACTION7 @63
+SAY SELECT_RARE1 @64
+SAY SELECT_RARE2 @65
+SAY CRITICAL_HIT @66
+SAY CRITICAL_MISS @67
+SAY TARGET_IMMUNE @68
+SAY INVENTORY_FULL @69
+SAY HIDDEN_IN_SHADOWS ~~
+SAY PICKED_POCKET @71
+SAY SPELL_DISRUPTED @72
+SAY SET_A_TRAP @73
+SAY REACT_TO_DIE_GENERAL @74
+SAY BIO @75
+WRITE_ASCII 0x248 ~FHFRN~ #8 // override
+WRITE_ASCII 0x2cc ~FHFRN~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFRN~ #32 //DV
+WRITE_ASCII 0X34 ~FHFS~ #8 //small portrait
+WRITE_ASCII 0x3c ~FHFM~ #8 //big portrait
+
+COPY ~Faren/creatures/mfrn12.cre~ ~override/fhfrn12.cre~
+ADD_CRE_ITEM ~LEAT05~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+ADD_CRE_ITEM ~sw1H08~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+ADD_CRE_ITEM ~FHFMARB~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
+ADD_CRE_ITEM ~POTN52~ #3 #0 #0 ~IDENTIFIED~ ~QITEM2~
+SAY NAME1 @14
+SAY NAME2 @14
+SAY INITIAL_MEETING ~~
+SAY MORALE @30
+SAY HAPPY @31
+SAY UNHAPPY_ANNOYED @32
+SAY UNHAPPY_SERIOUS @33
+SAY UNHAPPY_BREAKING @34
+SAY LEADER @35
+SAY TIRED @36
+SAY BORED @37
+SAY BATTLE_CRY1 @38
+SAY BATTLE_CRY2 @39
+SAY BATTLE_CRY3 @40
+SAY BATTLE_CRY4 @41
+SAY BATTLE_CRY5 @42
+SAY DAMAGE ~~ [FHFSS14]
+SAY DYING ~~ [FHFSS15]
+SAY HURT @45
+SAY AREA_FOREST @46
+SAY AREA_CITY @47
+SAY AREA_DUNGEON @48
+SAY AREA_DAY @49
+SAY AREA_NIGHT @50
+SAY SELECT_COMMON1 @51
+SAY SELECT_COMMON2 @52
+SAY SELECT_COMMON3 @138
+SAY SELECT_COMMON4 @54
+SAY SELECT_COMMON5 @55
+SAY SELECT_COMMON6 @56
+SAY SELECT_ACTION1 @57
+SAY SELECT_ACTION2 @58
+SAY SELECT_ACTION3 @59
+SAY SELECT_ACTION4 @60
+SAY SELECT_ACTION5 @61
+SAY SELECT_ACTION6 @62
+SAY SELECT_ACTION7 @63
+SAY SELECT_RARE1 @64
+SAY SELECT_RARE2 @65
+SAY CRITICAL_HIT @66
+SAY CRITICAL_MISS @67
+SAY TARGET_IMMUNE @68
+SAY INVENTORY_FULL @69
+SAY HIDDEN_IN_SHADOWS ~~
+SAY PICKED_POCKET @71
+SAY SPELL_DISRUPTED @72
+SAY SET_A_TRAP @73
+SAY REACT_TO_DIE_GENERAL @74
+SAY BIO @75
+WRITE_ASCII 0x248 ~FHFRN~ #8 // override
+WRITE_ASCII 0x2cc ~FHFRN~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFRN~ #32 //DV
+WRITE_ASCII 0X34 ~FHFS~ #8 //small portrait
+WRITE_ASCII 0x3c ~FHFM~ #8 //big portrait
+
+COPY ~Faren/creatures/mfrn13.cre~ ~override/fhfrn13.cre~
+ADD_CRE_ITEM ~LEAT05~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+ADD_CRE_ITEM ~sw1H08~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+ADD_CRE_ITEM ~FHFMARB~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
+ADD_CRE_ITEM ~POTN52~ #3 #0 #0 ~IDENTIFIED~ ~QITEM2~
+SAY NAME1 @14
+SAY NAME2 @14
+SAY INITIAL_MEETING ~~
+SAY MORALE @30
+SAY HAPPY @31
+SAY UNHAPPY_ANNOYED @32
+SAY UNHAPPY_SERIOUS @33
+SAY UNHAPPY_BREAKING @34
+SAY LEADER @35
+SAY TIRED @36
+SAY BORED @37
+SAY BATTLE_CRY1 @38
+SAY BATTLE_CRY2 @39
+SAY BATTLE_CRY3 @40
+SAY BATTLE_CRY4 @41
+SAY BATTLE_CRY5 @42
+SAY DAMAGE ~~ [FHFSS14]
+SAY DYING ~~ [FHFSS15]
+SAY HURT @45
+SAY AREA_FOREST @46
+SAY AREA_CITY @47
+SAY AREA_DUNGEON @48
+SAY AREA_DAY @49
+SAY AREA_NIGHT @50
+SAY SELECT_COMMON1 @51
+SAY SELECT_COMMON2 @52
+SAY SELECT_COMMON3 @138
+SAY SELECT_COMMON4 @54
+SAY SELECT_COMMON5 @55
+SAY SELECT_COMMON6 @56
+SAY SELECT_ACTION1 @57
+SAY SELECT_ACTION2 @58
+SAY SELECT_ACTION3 @59
+SAY SELECT_ACTION4 @60
+SAY SELECT_ACTION5 @61
+SAY SELECT_ACTION6 @62
+SAY SELECT_ACTION7 @63
+SAY SELECT_RARE1 @64
+SAY SELECT_RARE2 @65
+SAY CRITICAL_HIT @66
+SAY CRITICAL_MISS @67
+SAY TARGET_IMMUNE @68
+SAY INVENTORY_FULL @69
+SAY HIDDEN_IN_SHADOWS ~~
+SAY PICKED_POCKET @71
+SAY SPELL_DISRUPTED @72
+SAY SET_A_TRAP @73
+SAY REACT_TO_DIE_GENERAL @74
+SAY BIO @75
+WRITE_ASCII 0x248 ~FHFRN~ #8 // override
+WRITE_ASCII 0x2cc ~FHFRN~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFRN~ #32 //DV
+WRITE_ASCII 0X34 ~FHFS~ #8 //small portrait
+WRITE_ASCII 0x3c ~FHFM~ #8 //big portrait
+
+COPY ~Faren/creatures/mfrn14.cre~ ~override/fhfrn14.cre~
+ADD_CRE_ITEM ~LEAT05~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+ADD_CRE_ITEM ~sw1H08~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+ADD_CRE_ITEM ~FHFMARB~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
+ADD_CRE_ITEM ~POTN52~ #3 #0 #0 ~IDENTIFIED~ ~QITEM2~
+SAY NAME1 @14
+SAY NAME2 @14
+SAY INITIAL_MEETING ~~
+SAY MORALE @30
+SAY HAPPY @31
+SAY UNHAPPY_ANNOYED @32
+SAY UNHAPPY_SERIOUS @33
+SAY UNHAPPY_BREAKING @34
+SAY LEADER @35
+SAY TIRED @36
+SAY BORED @37
+SAY BATTLE_CRY1 @38
+SAY BATTLE_CRY2 @39
+SAY BATTLE_CRY3 @40
+SAY BATTLE_CRY4 @41
+SAY BATTLE_CRY5 @42
+SAY DAMAGE ~~ [FHFSS14]
+SAY DYING ~~ [FHFSS15]
+SAY HURT @45
+SAY AREA_FOREST @46
+SAY AREA_CITY @47
+SAY AREA_DUNGEON @48
+SAY AREA_DAY @49
+SAY AREA_NIGHT @50
+SAY SELECT_COMMON1 @51
+SAY SELECT_COMMON2 @52
+SAY SELECT_COMMON3 @138
+SAY SELECT_COMMON4 @54
+SAY SELECT_COMMON5 @55
+SAY SELECT_COMMON6 @56
+SAY SELECT_ACTION1 @57
+SAY SELECT_ACTION2 @58
+SAY SELECT_ACTION3 @59
+SAY SELECT_ACTION4 @60
+SAY SELECT_ACTION5 @61
+SAY SELECT_ACTION6 @62
+SAY SELECT_ACTION7 @63
+SAY SELECT_RARE1 @64
+SAY SELECT_RARE2 @65
+SAY CRITICAL_HIT @66
+SAY CRITICAL_MISS @67
+SAY TARGET_IMMUNE @68
+SAY INVENTORY_FULL @69
+SAY HIDDEN_IN_SHADOWS ~~
+SAY PICKED_POCKET @71
+SAY SPELL_DISRUPTED @72
+SAY SET_A_TRAP @73
+SAY REACT_TO_DIE_GENERAL @74
+SAY BIO @75
+WRITE_ASCII 0x248 ~FHFRN~ #8 // override
+WRITE_ASCII 0x2cc ~FHFRN~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFRN~ #32 //DV
+WRITE_ASCII 0X34 ~FHFS~ #8 //small portrait
+WRITE_ASCII 0x3c ~FHFM~ #8 //big portrait
+
+COPY ~Faren/creatures/mfrn25.cre~ ~override/fhfrn25.cre~
+ADD_CRE_ITEM ~LEAT15~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+ADD_CRE_ITEM ~sw1H74~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+ADD_CRE_ITEM ~BOW18~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON2~
+ADD_CRE_ITEM ~AROW11~ #40 #0 #0 ~IDENTIFIED~ ~QUIVER1~
+ADD_CRE_ITEM ~AROW01~ #40 #0 #0 ~IDENTIFIED~ ~QUIVER2~
+ADD_CRE_ITEM ~AROW02~ #40 #0 #0 ~IDENTIFIED~ ~QUIVER3~
+ADD_CRE_ITEM ~FHFMARB~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
+ADD_CRE_ITEM ~POTN52~ #5 #0 #0 ~IDENTIFIED~ ~QITEM2~
+ADD_CRE_ITEM ~HELM15~ #0 #0 #0 ~IDENTIFIED~ ~HELMET~
+SAY NAME1 @14
+SAY NAME2 @14
+SAY INITIAL_MEETING ~~
+SAY MORALE @30
+SAY HAPPY @31
+SAY UNHAPPY_ANNOYED @32
+SAY UNHAPPY_SERIOUS @33
+SAY UNHAPPY_BREAKING @34
+SAY LEADER @35
+SAY TIRED @36
+SAY BORED @37
+SAY BATTLE_CRY1 @38
+SAY BATTLE_CRY2 @39
+SAY BATTLE_CRY3 @40
+SAY BATTLE_CRY4 @41
+SAY BATTLE_CRY5 @42
+SAY DAMAGE ~~ [FHFSS14]
+SAY DYING ~~ [FHFSS15]
+SAY HURT @45
+SAY AREA_FOREST @46
+SAY AREA_CITY @47
+SAY AREA_DUNGEON @48
+SAY AREA_DAY @49
+SAY AREA_NIGHT @50
+SAY SELECT_COMMON1 @51
+SAY SELECT_COMMON2 @52
+SAY SELECT_COMMON3 @138
+SAY SELECT_COMMON4 @54
+SAY SELECT_COMMON5 @55
+SAY SELECT_COMMON6 @56
+SAY SELECT_ACTION1 @57
+SAY SELECT_ACTION2 @58
+SAY SELECT_ACTION3 @59
+SAY SELECT_ACTION4 @60
+SAY SELECT_ACTION5 @61
+SAY SELECT_ACTION6 @62
+SAY SELECT_ACTION7 @63
+SAY SELECT_RARE1 @64
+SAY SELECT_RARE2 @65
+SAY CRITICAL_HIT @66
+SAY CRITICAL_MISS @67
+SAY TARGET_IMMUNE @68
+SAY INVENTORY_FULL @69
+SAY HIDDEN_IN_SHADOWS ~~
+SAY PICKED_POCKET @71
+SAY SPELL_DISRUPTED @72
+SAY SET_A_TRAP @73
+SAY REACT_TO_DIE_GENERAL @74
+SAY BIO @75
+WRITE_ASCII 0x248 ~FHF25~ #8 // override
+WRITE_ASCII 0x2cc ~FHF25~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFRN~ #32 //DV
+WRITE_ASCII 0X34 ~FHFS~ #8 //small portrait
+WRITE_ASCII 0x3c ~FHFM~ #8 //big portrait
+
+BEGIN @76
+FORCED_SUBCOMPONENT @27
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @28
+COPY ~Faren/creatures/rofrn9.cre~ ~override/fhfrn9.cre~
+ADD_CRE_ITEM ~LEAT05~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+ADD_CRE_ITEM ~sw1H08~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+ADD_CRE_ITEM ~FHFMARB~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
+ADD_CRE_ITEM ~POTN52~ #3 #0 #0 ~IDENTIFIED~ ~QITEM2~
+SAY NAME1 @14
+SAY NAME2 @14
+SAY INITIAL_MEETING @29
+SAY MORALE @30
+SAY HAPPY @31
+SAY UNHAPPY_ANNOYED @32
+SAY UNHAPPY_SERIOUS @33
+SAY UNHAPPY_BREAKING @34
+SAY LEADER @35
+SAY TIRED @36
+SAY BORED @37
+SAY BATTLE_CRY1 @38
+SAY BATTLE_CRY2 @39
+SAY BATTLE_CRY3 @40
+SAY BATTLE_CRY4 @41
+SAY BATTLE_CRY5 @42
+SAY DAMAGE ~~ [FHFSS14]
+SAY DYING ~~ [FHFSS15]
+SAY HURT @45
+SAY AREA_FOREST @46
+SAY AREA_CITY @47
+SAY AREA_DUNGEON @48
+SAY AREA_DAY @49
+SAY AREA_NIGHT @50
+SAY SELECT_COMMON1 @51
+SAY SELECT_COMMON2 @77
+SAY SELECT_COMMON3 @138
+SAY SELECT_COMMON4 @54
+SAY SELECT_COMMON5 @78
+SAY SELECT_COMMON6 @79
+SAY SELECT_ACTION1 @80
+SAY SELECT_ACTION2 @81
+SAY SELECT_ACTION3 @59
+SAY SELECT_ACTION4 @60
+SAY SELECT_ACTION5 @82
+SAY SELECT_ACTION6 @62
+SAY SELECT_ACTION7 @63
+SAY SELECT_RARE1 @64
+SAY SELECT_RARE2 @65
+SAY CRITICAL_HIT @66
+SAY CRITICAL_MISS @67
+SAY TARGET_IMMUNE @68
+SAY INVENTORY_FULL @69
+SAY HIDDEN_IN_SHADOWS ~~
+SAY PICKED_POCKET @83
+SAY SPELL_DISRUPTED @84
+SAY SET_A_TRAP @85
+SAY REACT_TO_DIE_GENERAL @86
+SAY BIO @75
+WRITE_ASCII 0x248 ~FHFRN~ #8 // override
+WRITE_ASCII 0x2cc ~FHFRN~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFRN~ #32 //DV
+WRITE_ASCII 0X34 ~FHFS~ #8 //small portrait
+WRITE_ASCII 0x3c ~FHFM~ #8 //big portrait
+
+COPY ~Faren/creatures/rofrn11.cre~ ~override/fhfrn11.cre~
+ADD_CRE_ITEM ~LEAT05~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+ADD_CRE_ITEM ~sw1H08~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+ADD_CRE_ITEM ~FHFMARB~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
+ADD_CRE_ITEM ~POTN52~ #3 #0 #0 ~IDENTIFIED~ ~QITEM2~
+SAY NAME1 @14
+SAY NAME2 @14
+SAY INITIAL_MEETING @29
+SAY MORALE @30
+SAY HAPPY @31
+SAY UNHAPPY_ANNOYED @32
+SAY UNHAPPY_SERIOUS @33
+SAY UNHAPPY_BREAKING @34
+SAY LEADER @35
+SAY TIRED @36
+SAY BORED @37
+SAY BATTLE_CRY1 @38
+SAY BATTLE_CRY2 @39
+SAY BATTLE_CRY3 @40
+SAY BATTLE_CRY4 @41
+SAY BATTLE_CRY5 @42
+SAY DAMAGE ~~ [FHFSS14]
+SAY DYING ~~ [FHFSS15]
+SAY HURT @45
+SAY AREA_FOREST @46
+SAY AREA_CITY @47
+SAY AREA_DUNGEON @48
+SAY AREA_DAY @49
+SAY AREA_NIGHT @50
+SAY SELECT_COMMON1 @51
+SAY SELECT_COMMON2 @77
+SAY SELECT_COMMON3 @138
+SAY SELECT_COMMON4 @54
+SAY SELECT_COMMON5 @78
+SAY SELECT_COMMON6 @79
+SAY SELECT_ACTION1 @80
+SAY SELECT_ACTION2 @81
+SAY SELECT_ACTION3 @59
+SAY SELECT_ACTION4 @60
+SAY SELECT_ACTION5 @82
+SAY SELECT_ACTION6 @62
+SAY SELECT_ACTION7 @63
+SAY SELECT_RARE1 @64
+SAY SELECT_RARE2 @65
+SAY CRITICAL_HIT @66
+SAY CRITICAL_MISS @67
+SAY TARGET_IMMUNE @68
+SAY INVENTORY_FULL @69
+SAY HIDDEN_IN_SHADOWS ~~
+SAY PICKED_POCKET @83
+SAY SPELL_DISRUPTED @84
+SAY SET_A_TRAP @85
+SAY REACT_TO_DIE_GENERAL @86
+SAY BIO @75
+WRITE_ASCII 0x248 ~FHFRN~ #8 // override
+WRITE_ASCII 0x2cc ~FHFRN~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFRN~ #32 //DV
+WRITE_ASCII 0X34 ~FHFS~ #8 //small portrait
+WRITE_ASCII 0x3c ~FHFM~ #8 //big portrait
+
+COPY ~Faren/creatures/rofrn12.cre~ ~override/fhfrn12.cre~
+ADD_CRE_ITEM ~LEAT05~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+ADD_CRE_ITEM ~sw1H08~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+ADD_CRE_ITEM ~FHFMARB~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
+ADD_CRE_ITEM ~POTN52~ #3 #0 #0 ~IDENTIFIED~ ~QITEM2~
+SAY NAME1 @14
+SAY NAME2 @14
+SAY INITIAL_MEETING @29
+SAY MORALE @30
+SAY HAPPY @31
+SAY UNHAPPY_ANNOYED @32
+SAY UNHAPPY_SERIOUS @33
+SAY UNHAPPY_BREAKING @34
+SAY LEADER @35
+SAY TIRED @36
+SAY BORED @37
+SAY BATTLE_CRY1 @38
+SAY BATTLE_CRY2 @39
+SAY BATTLE_CRY3 @40
+SAY BATTLE_CRY4 @41
+SAY BATTLE_CRY5 @42
+SAY DAMAGE ~~ [FHFSS14]
+SAY DYING ~~ [FHFSS15]
+SAY HURT @45
+SAY AREA_FOREST @46
+SAY AREA_CITY @47
+SAY AREA_DUNGEON @48
+SAY AREA_DAY @49
+SAY AREA_NIGHT @50
+SAY SELECT_COMMON1 @51
+SAY SELECT_COMMON2 @77
+SAY SELECT_COMMON3 @138
+SAY SELECT_COMMON4 @54
+SAY SELECT_COMMON5 @78
+SAY SELECT_COMMON6 @79
+SAY SELECT_ACTION1 @80
+SAY SELECT_ACTION2 @81
+SAY SELECT_ACTION3 @59
+SAY SELECT_ACTION4 @60
+SAY SELECT_ACTION5 @82
+SAY SELECT_ACTION6 @62
+SAY SELECT_ACTION7 @63
+SAY SELECT_RARE1 @64
+SAY SELECT_RARE2 @65
+SAY CRITICAL_HIT @66
+SAY CRITICAL_MISS @67
+SAY TARGET_IMMUNE @68
+SAY INVENTORY_FULL @69
+SAY HIDDEN_IN_SHADOWS ~~
+SAY PICKED_POCKET @83
+SAY SPELL_DISRUPTED @84
+SAY SET_A_TRAP @85
+SAY REACT_TO_DIE_GENERAL @86
+SAY BIO @75
+WRITE_ASCII 0x248 ~FHFRN~ #8 // override
+WRITE_ASCII 0x2cc ~FHFRN~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFRN~ #32 //DV
+WRITE_ASCII 0X34 ~FHFS~ #8 //small portrait
+WRITE_ASCII 0x3c ~FHFM~ #8 //big portrait
+
+COPY ~Faren/creatures/rofrn13.cre~ ~override/fhfrn13.cre~
+ADD_CRE_ITEM ~LEAT05~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+ADD_CRE_ITEM ~sw1H08~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+ADD_CRE_ITEM ~FHFMARB~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
+ADD_CRE_ITEM ~POTN52~ #3 #0 #0 ~IDENTIFIED~ ~QITEM2~
+SAY NAME1 @14
+SAY NAME2 @14
+SAY INITIAL_MEETING @29
+SAY MORALE @30
+SAY HAPPY @31
+SAY UNHAPPY_ANNOYED @32
+SAY UNHAPPY_SERIOUS @33
+SAY UNHAPPY_BREAKING @34
+SAY LEADER @35
+SAY TIRED @36
+SAY BORED @37
+SAY BATTLE_CRY1 @38
+SAY BATTLE_CRY2 @39
+SAY BATTLE_CRY3 @40
+SAY BATTLE_CRY4 @41
+SAY BATTLE_CRY5 @42
+SAY DAMAGE ~~ [FHFSS14]
+SAY DYING ~~ [FHFSS15]
+SAY HURT @45
+SAY AREA_FOREST @46
+SAY AREA_CITY @47
+SAY AREA_DUNGEON @48
+SAY AREA_DAY @49
+SAY AREA_NIGHT @50
+SAY SELECT_COMMON1 @51
+SAY SELECT_COMMON2 @77
+SAY SELECT_COMMON3 @138
+SAY SELECT_COMMON4 @54
+SAY SELECT_COMMON5 @78
+SAY SELECT_COMMON6 @79
+SAY SELECT_ACTION1 @80
+SAY SELECT_ACTION2 @81
+SAY SELECT_ACTION3 @59
+SAY SELECT_ACTION4 @60
+SAY SELECT_ACTION5 @82
+SAY SELECT_ACTION6 @62
+SAY SELECT_ACTION7 @63
+SAY SELECT_RARE1 @64
+SAY SELECT_RARE2 @65
+SAY CRITICAL_HIT @66
+SAY CRITICAL_MISS @67
+SAY TARGET_IMMUNE @68
+SAY INVENTORY_FULL @69
+SAY HIDDEN_IN_SHADOWS ~~
+SAY PICKED_POCKET @83
+SAY SPELL_DISRUPTED @84
+SAY SET_A_TRAP @85
+SAY REACT_TO_DIE_GENERAL @86
+SAY BIO @75
+WRITE_ASCII 0x248 ~FHFRN~ #8 // override
+WRITE_ASCII 0x2cc ~FHFRN~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFRN~ #32 //DV
+WRITE_ASCII 0X34 ~FHFS~ #8 //small portrait
+WRITE_ASCII 0x3c ~FHFM~ #8 //big portrait
+
+COPY ~Faren/creatures/rofrn14.cre~ ~override/fhfrn14.cre~
+ADD_CRE_ITEM ~LEAT05~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+ADD_CRE_ITEM ~sw1H08~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+ADD_CRE_ITEM ~FHFMARB~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
+ADD_CRE_ITEM ~POTN52~ #3 #0 #0 ~IDENTIFIED~ ~QITEM2~
+SAY NAME1 @14
+SAY NAME2 @14
+SAY INITIAL_MEETING @29
+SAY MORALE @30
+SAY HAPPY @31
+SAY UNHAPPY_ANNOYED @32
+SAY UNHAPPY_SERIOUS @33
+SAY UNHAPPY_BREAKING @34
+SAY LEADER @35
+SAY TIRED @36
+SAY BORED @37
+SAY BATTLE_CRY1 @38
+SAY BATTLE_CRY2 @39
+SAY BATTLE_CRY3 @40
+SAY BATTLE_CRY4 @41
+SAY BATTLE_CRY5 @42
+SAY DAMAGE ~~ [FHFSS14]
+SAY DYING ~~ [FHFSS15]
+SAY HURT @45
+SAY AREA_FOREST @46
+SAY AREA_CITY @47
+SAY AREA_DUNGEON @48
+SAY AREA_DAY @49
+SAY AREA_NIGHT @50
+SAY SELECT_COMMON1 @51
+SAY SELECT_COMMON2 @77
+SAY SELECT_COMMON3 @138
+SAY SELECT_COMMON4 @54
+SAY SELECT_COMMON5 @78
+SAY SELECT_COMMON6 @79
+SAY SELECT_ACTION1 @80
+SAY SELECT_ACTION2 @81
+SAY SELECT_ACTION3 @59
+SAY SELECT_ACTION4 @60
+SAY SELECT_ACTION5 @82
+SAY SELECT_ACTION6 @62
+SAY SELECT_ACTION7 @63
+SAY SELECT_RARE1 @64
+SAY SELECT_RARE2 @65
+SAY CRITICAL_HIT @66
+SAY CRITICAL_MISS @67
+SAY TARGET_IMMUNE @68
+SAY INVENTORY_FULL @69
+SAY HIDDEN_IN_SHADOWS ~~
+SAY PICKED_POCKET @83
+SAY SPELL_DISRUPTED @84
+SAY SET_A_TRAP @85
+SAY REACT_TO_DIE_GENERAL @86
+SAY BIO @75
+WRITE_ASCII 0x248 ~FHFRN~ #8 // override
+WRITE_ASCII 0x2cc ~FHFRN~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFRN~ #32 //DV
+WRITE_ASCII 0X34 ~FHFS~ #8 //small portrait
+WRITE_ASCII 0x3c ~FHFM~ #8 //big portrait
+
+COPY ~Faren/creatures/rofrn25.cre~ ~override/fhfrn25.cre~
+ADD_CRE_ITEM ~LEAT15~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+ADD_CRE_ITEM ~sw1H74~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+ADD_CRE_ITEM ~BOW18~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON2~
+ADD_CRE_ITEM ~AROW11~ #40 #0 #0 ~IDENTIFIED~ ~QUIVER1~
+ADD_CRE_ITEM ~AROW01~ #40 #0 #0 ~IDENTIFIED~ ~QUIVER2~
+ADD_CRE_ITEM ~AROW02~ #40 #0 #0 ~IDENTIFIED~ ~QUIVER3~
+ADD_CRE_ITEM ~FHFMARB~ #0 #0 #0 ~IDENTIFIED~ ~QITEM1~
+ADD_CRE_ITEM ~POTN52~ #5 #0 #0 ~IDENTIFIED~ ~QITEM2~
+ADD_CRE_ITEM ~HELM15~ #0 #0 #0 ~IDENTIFIED~ ~HELMET~
+SAY NAME1 @14
+SAY NAME2 @14
+SAY INITIAL_MEETING @29
+SAY MORALE @30
+SAY HAPPY @31
+SAY UNHAPPY_ANNOYED @32
+SAY UNHAPPY_SERIOUS @33
+SAY UNHAPPY_BREAKING @34
+SAY LEADER @35
+SAY TIRED @36
+SAY BORED @37
+SAY BATTLE_CRY1 @38
+SAY BATTLE_CRY2 @39
+SAY BATTLE_CRY3 @40
+SAY BATTLE_CRY4 @41
+SAY BATTLE_CRY5 @42
+SAY DAMAGE ~~ [FHFSS14]
+SAY DYING ~~ [FHFSS15]
+SAY HURT @45
+SAY AREA_FOREST @46
+SAY AREA_CITY @47
+SAY AREA_DUNGEON @48
+SAY AREA_DAY @49
+SAY AREA_NIGHT @50
+SAY SELECT_COMMON1 @51
+SAY SELECT_COMMON2 @77
+SAY SELECT_COMMON3 @138
+SAY SELECT_COMMON4 @54
+SAY SELECT_COMMON5 @78
+SAY SELECT_COMMON6 @79
+SAY SELECT_ACTION1 @80
+SAY SELECT_ACTION2 @81
+SAY SELECT_ACTION3 @59
+SAY SELECT_ACTION4 @60
+SAY SELECT_ACTION5 @82
+SAY SELECT_ACTION6 @62
+SAY SELECT_ACTION7 @63
+SAY SELECT_RARE1 @64
+SAY SELECT_RARE2 @65
+SAY CRITICAL_HIT @66
+SAY CRITICAL_MISS @67
+SAY TARGET_IMMUNE @68
+SAY INVENTORY_FULL @69
+SAY HIDDEN_IN_SHADOWS ~~
+SAY PICKED_POCKET @83
+SAY SPELL_DISRUPTED @84
+SAY SET_A_TRAP @85
+SAY REACT_TO_DIE_GENERAL @86
+SAY BIO @75
+WRITE_ASCII 0x248 ~FHF25~ #8 // override
+WRITE_ASCII 0x2cc ~FHF25~ #8 // dialogue
+WRITE_ASCII 0x280 ~FHFRN~ #32 //DV
+WRITE_ASCII 0X34 ~FHFS~ #8 //small portrait
+WRITE_ASCII 0x3c ~FHFM~ #8 //big portrait
+
+//Optional components
+
+BEGIN ~Adrian Content~
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/rh#adr.dlg~ ~You do not appear to have Adrian installed~
+COMPILE ~Faren/crossmod/adrian/faren.d~
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/adrian/faren_fhfrn.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/adrian/fhfadr25.d~
+END
+
+BEGIN @87
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/c#ajanb.dlg~ @90
+COMPILE ~Faren/crossmod/ajantis/fhfaj.d~
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/ajantis/fhfaj2.baf~
+EXTEND_BOTTOM ~fhfrnd.bcs~ ~Faren/crossmod/ajantis/fhfaj3.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/ajantis/fhfaj25.d~
+END
+
+BEGIN @91
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/m#amber.dlg~ @92
+COMPILE ~Faren/crossmod/amber/fhfamb.d~
+EXTEND_BOTTOM ~m#amber.bcs~ ~Faren/crossmod/amber/fhfamb.baf~
+
+BEGIN @93
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/adangel.dlg~ @94
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/angelo/fhfang.baf~
+EXTEND_BOTTOM ~adangel.bcs~ ~Faren/crossmod/angelo/fhfang2.baf~
+COMPILE ~Faren/crossmod/angelo/fhfang.d~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/angelo/fhfang25.d~
+END
+
+BEGIN @140
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/lk#arath.dlg~ @141
+COMPILE ~Faren/crossmod/arath/fhfarath.d~
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/arath/fhfarath.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/arath/fhfara25.d~
+END
+
+BEGIN @95
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/k#aurenb.dlg~ @96
+COMPILE ~Faren/crossmod/aurenaseph/fhfaur.d~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/aurenaseph/fhfaur25.d~
+END
+
+BEGIN ~Beyond the Law Content~
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/z#kova.dlg~ ~You do not appear to have Beyond the Law installed~
+COMPILE ~Faren/crossmod/btl/fhfbtl.d~
+
+BEGIN @142
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/o#bran.dlg~ @143
+COMPILE ~Faren/crossmod/branwen/fhfbran.d~
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/branwen/fhfbran.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/branwen/fhfbr25.d~
+END
+
+BEGIN @97
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/rchloe.dlg~ @98
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/chloe/fhfchloe1.baf~
+EXTEND_BOTTOM ~chloe.bcs~ ~Faren/crossmod/chloe/fhfchloe2.baf~
+COMPILE ~Faren/crossmod/chloe/fhfchloe.d~
+
+BEGIN @144
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/o#coran.dlg~ @145
+COMPILE ~Faren/crossmod/coran/fhfcoran.d~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/coran/fhfcor25.d~
+END
+
+BEGIN @146
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/t#dace.dlg~ @147
+COMPILE ~Faren/crossmod/dace/fhfdace.d~
+EXTEND_BOTTOM ~t#dace.bcs~ ~Faren/crossmod/dace/fhfdace.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/dace/fhfdac25.d~
+END
+
+BEGIN @148
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/t1dar.dlg~ @149
+COMPILE ~Faren/crossmod/darian/fhfdar.d~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/darian/fhfdar25.d~
+END
+
+BEGIN @99
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/PGNalBod.itm~ @100
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/dearnise/fhfnal.baf~
+EXTEND_BOTTOM ~nalia.bcs~ ~Faren/crossmod/dearnise/fhfnal2.baf~
+COMPILE ~Faren/crossmod/dearnise/fhfnal.d~
+
+BEGIN @101
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/Elvira.cre~ @102
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/edwin/fhfedwin.baf~
+EXTEND_BOTTOM ~edwin.bcs~ ~Faren/crossmod/edwin/fhfedwin2.baf~
+COMPILE ~Faren/crossmod/edwin/fhfedwin.d~
+
+BEGIN @103
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/e3fade.dlg~ @104
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/fade/fhffade.baf~
+COMPILE ~Faren/crossmod/fade/fhffade.d~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/fade/fhffad25.d~
+END
+
+BEGIN ~Haldamir Content~
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/b!hal.dlg~ ~You do not appear to have Haldamir installed~
+COMPILE ~Faren/crossmod/haldamir/fhffhal.d~
+
+BEGIN @150
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/rh#isr.dlg~ @151
+EXTEND_BOTTOM ~rh#isr.bcs~ ~Faren/crossmod/isra/fhfisr.baf~
+COMPILE ~Faren/crossmod/isra/fhfisra.d~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/isra/fhfisr25.d~
+END
+
+BEGIN @105
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/lk#ibrac.itm~ @106
+COMPILE ~Faren/crossmod/iylos/fhfiylos.d~
+
+BEGIN @107
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/j#klsy.bcs~ @108
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/kelsey/fhfkls.baf~
+EXTEND_BOTTOM ~j#klsy.bcs~ ~Faren/crossmod/kelsey/fhfkls2.baf~
+COMPILE ~Faren/crossmod/kelsey/fhfklsy.d~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/kelsey/fhfkls25.d~
+END
+
+BEGIN @109
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/fwketo.dlg~ @110
+COMPILE ~Faren/crossmod/keto/fhfketo.d~
+
+BEGIN @111
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/fhland.bcs~ @112
+COMPILE ~Faren/crossmod/luxley/fhflux.d~
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/luxley/fhflux.baf~
+EXTEND_BOTTOM ~fhfrnD.bcs~ ~Faren/crossmod/luxley/fhfluxD.baf~
+
+BEGIN @113
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/fhnat.dlg~ @114
+COMPILE ~Faren/crossmod/nathaniel/fhfnath.d~
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/nathaniel/fhfnath.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/nathaniel/fhfn25.d~
+END
+
+BEGIN ~Nephele Content~
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/lk#neph.dlg~ ~You do not appear to have Nephele installed~
+COMPILE ~Faren/crossmod/nephele/fhfneph.d~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/nephele/fhfnep25.d~
+END
+
+BEGIN @115
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/lk#nind.dlg~ @116
+COMPILE ~Faren/crossmod/ninde/fhfnind.d~
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/ninde/fhfnind.baf~
+EXTEND_BOTTOM ~lk#nins.bcs~ ~Faren/crossmod/ninde/fhfnind2.baf~
+EXTEND_BOTTOM ~lk#nind.bcs~ ~Faren/crossmod/ninde/fhfnind3.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/ninde/fhfni25.d~
+END
+
+BEGIN @117
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+COMPILE ~Faren/crossmod/re/fhfreact.d~
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/re/fhfreact.baf~
+
+BEGIN @118
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/SAERILET.dlg~ @119
+COMPILE ~Faren/crossmod/saerileth/fhfsl.d~
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/saerileth/fhfsl.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/saerileth/fhfsl25.d~
+END
+
+BEGIN @120
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/k#sarahb.dlg~ @121
+COMPILE ~Faren/crossmod/sarah/fhfsr.d~
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/sarah/fhfsr.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/sarah/fhfsr25.d~
+END
+
+BEGIN @122
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/sola.dlg~ @123
+COMPILE ~Faren/crossmod/sola/fhfsol.d~
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/sola/fhfsol.baf~
+
+BEGIN @152
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/tashia.dlg~ @153
+COMPILE ~Faren/crossmod/tashia/fhftash.d~
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/tashia/fhftash.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/tashia/fhftas25.d~
+END
+
+BEGIN @154
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/O#Tiax.dlg~ @155
+COMPILE ~Faren/crossmod/tiax/fhftiax.d~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/tiax/fhftia25.d~
+END
+
+BEGIN @124
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/btsujat.dlg~ @125
+COMPILE ~Faren/crossmod/tsujatha/fhftsu.d~
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/tsujatha/fhftsu.baf~
+EXTEND_BOTTOM ~tsujath.bcs~ ~Faren/crossmod/tsujatha/fhftsu2.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/tsujatha/fhftsu25.d~
+END
+
+BEGIN @126
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/o#xan.dlg~ @127
+COMPILE ~Faren/crossmod/xan/fhfxan.d~
+EXTEND_BOTTOM ~fhfrn.bcs~ ~Faren/crossmod/xan/fhfxan.baf~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/xan/fhfx25.d~
+END
+
+BEGIN @128
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/lk#xula.dlg~ @129
+COMPILE ~Faren/crossmod/xulaye/fhfxul.d~
+
+BEGIN @130
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/byasraen.dlg~ @131
+COMPILE ~Faren/crossmod/yasraena/fhfyas.d~
+ACTION_IF FILE_EXISTS_IN_GAME ~mel01.cre~ THEN
+BEGIN
+COMPILE ~Faren/crossmod/yasraena/fhfyas25.d~
+END
+
+BEGIN @156
+GROUP @88
+REQUIRE_COMPONENT ~Setup-Faren.tp2~ ~0~ @89
+REQUIRE_FILE ~override/lk#yesl.dlg~ @157
+COMPILE ~Faren/crossmod/yeslick/fhfyes.d~

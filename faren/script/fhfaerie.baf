@@ -1,0 +1,9 @@
+//Make Faren notice Aerie shouting at the PC
+
+IF
+GlobalGT("Lovetalk","LOCALS",18)
+Global("FHFAerieShout","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFAerieShout","GLOBAL",1)
+END

@@ -1,0 +1,33 @@
+//Bodhi's abduction
+
+IF
+    True()
+THEN
+    RESPONSE #100
+        CutSceneId("FHFRN")
+        CreateCreatureObject("VAMPAMB","FHFRN",0,0,0)
+        SetGlobal("FHFarenVampire","GLOBAL",1)
+        Wait(1)
+        CreateVisualEffectObject("SPDISPMA",Myself)
+        DropInventory()
+        SetLeavePartyDialogFile()
+        ChangeAIScript("VAMPAMB",OVERRIDE)
+        ChangeAIScript("",DEFAULT)
+        DialogInterrupt(FALSE)
+        LeaveParty()
+        EndCutSceneMode()
+END
+
+//The abductors' escape
+
+IF
+    True()
+THEN
+    RESPONSE #100
+        CutSceneId("bodhiamb")
+        DialogInterrupt(FALSE)
+        CreateCreatureObject("VAMPIM01",Myself,0,0,0) // Vampire
+        CreateCreatureObject("VAMPIM01",Myself,0,0,0) // Vampire
+        CreateCreatureObject("VAMPIM01",Myself,0,0,0) // Vampire
+        CreateCreatureObject("VAMPIM01",Myself,0,0,0) // Vampire
+END

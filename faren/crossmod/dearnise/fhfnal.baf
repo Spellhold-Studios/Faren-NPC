@@ -1,0 +1,70 @@
+//Conflict talk 1:
+
+IF
+InParty("FHFRN")
+InParty("Nalia")
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("PGNaliaRomanceActive","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",13)
+GlobalLT("FHFarenLoveTalk","GLOBAL",24)
+Global("FHFNalConflictTimerSet1","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNalConflictTimerSet1","GLOBAL",1)
+RealSetGlobalTimer("FHFNalConflictTimer","GLOBAL",200)
+END
+
+IF
+InParty("FHFRN")
+InParty("Nalia")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Nalia",CD_STATE_NOTVALID)
+Global("PGNaliaRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",1)
+RealGlobalTimerExpired("FHFNalConflictTimer","GLOBAL")
+Global("FHFNalConflictTimerSet1","GLOBAL",1)
+Global("FHFNalConflict1","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNalConflict1","GLOBAL",1)
+END
+
+//Conflict talk 2:
+
+IF
+InParty("FHFRN")
+InParty("Nalia")
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("PGNaliaRomanceActive","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",22)
+Global("FHFNalConflictTimerSet2","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNalConflictTimerSet2","GLOBAL",1)
+RealSetGlobalTimer("FHFNalConflictTimer","GLOBAL",500)
+END
+
+IF
+InParty("FHFRN")
+InParty("Nalia")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Nalia",CD_STATE_NOTVALID)
+Global("PGNaliaRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",1)
+RealGlobalTimerExpired("FHFNalConflictTimer","GLOBAL")
+Global("FHFNalConflictTimerSet2","GLOBAL",1)
+Global("FHFNalConflict2","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNalConflict2","GLOBAL",1)
+END

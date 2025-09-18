@@ -1,0 +1,34 @@
+//Making sure the game realises Faren's been vamped
+
+IF
+Global("CleanseVampire","AR1401",2)
+Global("FHFarenVampire","GLOBAL",3)
+Name("FHFRN",Myself)
+AreaCheck("AR1401")
+THEN
+RESPONSE #100
+SetGlobal("FHFarenVampire","GLOBAL",4)
+DialogInterrupt(TRUE)
+ChangeAIScript("FHFRN",OVERRIDE)
+END
+
+IF
+Global("FHFarenVampire","GLOBAL",1)
+Global("RomanceVampire","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("RomanceVampire","GLOBAL",1)
+Continue()
+END
+
+IF
+Global("FHFarenVampire","GLOBAL",1)
+Global("RomanceVampire","GLOBAL",1)
+Global("RomanceVampireTeleport","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("RomanceVampireTeleport","GLOBAL",1)
+CreateVisualEffectObject("SPDIMNDR",Myself)
+Wait(2)
+DestroySelf()
+END

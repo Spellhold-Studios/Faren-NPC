@@ -1,0 +1,13 @@
+@0    = ~So this is it, then? I kind of wish I could head over to Trademeet, but I'm guessing that's not on the agenda.~ [FHF77]
+@1    = ~Don't go anywhere, Faren. I want you in the group.~
+@2    = ~Just wait here for a little while. I should be back at some point.~
+@3    = ~I'll send you to my pocket plane. Wait for me there.~
+@4    = ~I guess you've thought this over, though I would've liked to have a bit more warning. Where shall I go and wait?~ [FHF78]
+@5    = ~Okay. Well...take care, then, <CHARNAME>.~
+@6    = ~Okay, I hope I'll see you there. Take care, then, <CHARNAME>.~
+@7    = ~It's you! I've been worried-- that is to say, it's good to see you again. Shall we join up again?~ [FHF79]
+@8    = ~Not right now, Faren. There are still some things I have to do without you.~
+@9    = ~Yes, I would like that very much.~
+@10   = ~Hey, fancy seeing you here. Time to get on the road again?~ [FHF80]
+@11   = ~Yes, I need your services again.~
+@12   = ~Okay. I'll see you around, then.~

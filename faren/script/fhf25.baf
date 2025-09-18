@@ -1,0 +1,467 @@
+//Initial dialogue
+//Abazigal talk
+//Friendtalk script
+//Lovetalk script
+//Wraith spirit
+//Final talk
+//Flirt script
+//String fixer
+//Commenting after Nadiyya meeting
+//Commenting after Nadiyya's quest is resolved
+
+//Initial dialogue
+IF
+Global("FHFarenSummoned","GLOBAL",1)
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//Abazigal talk
+
+IF
+InParty(Myself)
+Dead("ABAZIGAL")
+AreaCheck("AR6005")
+CombatCounter(0)
+Global("FHFSetAbaTimer","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFSetAbaTimer","GLOBAL",1)
+RealSetGlobalTimer("FHFAbaTimer","GLOBAL",60)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("FHFAbaTalk","GLOBAL",0)
+CombatCounter(0)
+AreaCheck("AR6005")
+RealGlobalTimerExpired("FHFSetAbaTimer","GLOBAL")
+THEN
+RESPONSE #100
+SetGlobal("FHFAbaTalk","GLOBAL",1)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("FHFAbaTalk","GLOBAL",1)
+CombatCounter(0)
+AreaCheck("AR6005")
+RealGlobalTimerExpired("FHFAbaTimer","GLOBAL")
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//Post-Saradush talk script: romantic
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+Global("FHFSaradush","GLOBAL",2)
+THEN
+RESPONSE #100
+SetGlobal("FHFSaradush","GLOBAL",3)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+Global("FHFSaradush","GLOBAL",3)
+THEN
+RESPONSE #100
+PlaySong(0)
+PlaySound("fhfmus")
+StartDialogueNoSet(Player1)
+END
+
+//Post-Saradush talk script: friendly
+
+IF
+InParty(Myself)
+Global("FHFSaradushFriend","GLOBAL",0)
+Global("FHFSaradushFriendTimerSet","GLOBAL",0)
+!Global("FHFarenRomanceActive","GLOBAL",2)
+Dead("yaga01")
+!PartyHasItem("FHFFEL")
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+See(Player1)
+THEN
+RESPONSE #100
+SetGlobal("FHFSaradushFriend","GLOBAL",1)
+SetGlobal("FHFSaradushFriendTimerSet","GLOBAL",1)
+SetGlobalTimer("FHFSaradushFriendTimer","GLOBAL",ONE_DAY)
+END
+
+IF
+InParty(Myself)
+GlobalTimerExpired("FHFSaradushFriendTimer","GLOBAL")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+!AreaType(DUNGEON)
+!See([ENEMY])
+Global("FHFSaradushFriend","GLOBAL",1)
+THEN
+RESPONSE #100
+SetGlobal("FHFSaradushFriend","GLOBAL",2)
+END
+
+IF
+InParty(Myself)
+!AreaType(DUNGEON)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+!See([ENEMY])
+!AreaType(DUNGEON)
+Global("FHFSaradushFriend","GLOBAL",2)
+THEN
+RESPONSE #100
+StartDialogueNoSet(Player1)
+END
+
+//Friendtalk script
+
+IF
+InParty(Myself)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",3)
+Global("FHFarenFriend","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFarenFriend","GLOBAL",1)
+END
+
+IF
+InParty(Myself)
+Global("FHFarenFriend","GLOBAL",1)
+Global("FHFToBFriendTalk","GLOBAL",0)
+THEN
+RESPONSE #100
+RealSetGlobalTimer("FHFToBTalkTimer","GLOBAL",3600)
+SetGlobal("FHFToBFriendTalk","GLOBAL",1)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("FHFarenFriend","GLOBAL",1)
+OR(5)
+Global("FHFToBFriendTalk","GLOBAL",2)
+Global("FHFToBFriendTalk","GLOBAL",4)
+Global("FHFToBFriendTalk","GLOBAL",6)
+Global("FHFToBFriendTalk","GLOBAL",8)
+Global("FHFToBFriendTalk","GLOBAL",10)
+RealGlobalTimerExpired("FHFToBTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+IF
+InParty(Myself)
+Global("FHFarenFriend","GLOBAL",1)
+!AreaType(DUNGEON)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+OR(5)
+Global("FHFToBFriendTalk","GLOBAL",1)
+Global("FHFToBFriendTalk","GLOBAL",3)
+Global("FHFToBFriendTalk","GLOBAL",5)
+Global("FHFToBFriendTalk","GLOBAL",7)
+Global("FHFToBFriendTalk","GLOBAL",9)
+RealGlobalTimerExpired("FHFToBTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+IncrementGlobal("FHFToBFriendTalk","GLOBAL",1)
+END
+
+//Lovetalk script
+
+IF
+InParty(Myself)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("FHFToBLoveTalk","GLOBAL",0)
+THEN
+RESPONSE #100
+RealSetGlobalTimer("FHFToBTalkTimer","GLOBAL",3600)
+SetGlobal("FHFToBLoveTalk","GLOBAL",1)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+Global("FHFarenRomanceActive","GLOBAL",2)
+OR(6)
+Global("FHFToBLoveTalk","GLOBAL",2)
+Global("FHFToBLoveTalk","GLOBAL",4)
+Global("FHFToBLoveTalk","GLOBAL",6)
+Global("FHFToBLoveTalk","GLOBAL",8)
+Global("FHFToBLoveTalk","GLOBAL",10)
+Global("FHFToBLoveTalk","GLOBAL",12)
+RealGlobalTimerExpired("FHFToBTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+PlaySong(0)
+PlaySound("fhfmus")
+StartDialogueNoSet(Player1)
+END
+
+IF
+InParty(Myself)
+Global("FHFarenRomanceActive","GLOBAL",2)
+!AreaType(DUNGEON)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+OR(6)
+Global("FHFToBLoveTalk","GLOBAL",1)
+Global("FHFToBLoveTalk","GLOBAL",3)
+Global("FHFToBLoveTalk","GLOBAL",5)
+Global("FHFToBLoveTalk","GLOBAL",7)
+Global("FHFToBLoveTalk","GLOBAL",9)
+Global("FHFToBLoveTalk","GLOBAL",11)
+RealGlobalTimerExpired("FHFToBTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+IncrementGlobal("FHFToBLoveTalk","GLOBAL",1)
+END
+
+//Wraith spirit
+
+IF
+Global("FHFAfterWraith","GLOBAL",0)
+Global("FHFLovedOne","GLOBAL",6)
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+!See([ENEMY])
+GlobalGT("WraithPunish","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFAfterWraith","GLOBAL",1)
+END
+
+IF
+Global("FHFAfterWraith","GLOBAL",1)
+InParty(Myself)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//Final talk
+
+IF
+InParty(Myself)
+See(Player1)
+CombatCounter(0)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("ChallengesDone","GLOBAL",1)
+Global("FHFFinalTalk","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFFinalTalk","GLOBAL",1)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("FHFFinalTalk","GLOBAL",1)
+THEN
+RESPONSE #100
+PlaySong(0)
+PlaySound("fhfmus")
+StartDialogueNoSet(Player1)
+END
+
+//Starting the flirt timer
+
+IF
+InParty(Myself)
+Global("FHFFlirtCounterTob","GLOBAL",0)
+Global("FHFarenRomanceActive","GLOBAL",2)
+THEN
+RESPONSE #100
+SetGlobal("FHFFlirtCounterTob","GLOBAL",1)
+RealSetGlobalTimer("FHFFlirtTimertob","GLOBAL",1000)
+END
+
+//Initiating the flirts
+
+IF
+InParty(Myself)
+RealGlobalTimerExpired("FHFFlirtTimertob","GLOBAL")
+Global("FHFFlirtsDisabled","GLOBAL",0)
+Global("FHFStartFlirtTob","GLOBAL",0)
+Global("FHFarenRomanceActive","GLOBAL",2)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!AreaType(DUNGEON)
+CombatCounter(0)
+!See([ENEMY])
+THEN
+RESPONSE #100
+SetGlobal("FHFStartFlirtTob","GLOBAL",1)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+Global("FHFStartFlirtTob","GLOBAL",1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+CombatCounter(0)
+!See([ENEMY])
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//String fixer
+
+IF
+HotKey(L)
+THEN
+RESPONSE #100
+StartCutSceneMode()
+StartCutScene("fhffix")
+END
+
+//Commenting after Nadiyya has left
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("FHFNadiyyaReact","GLOBAL",0)
+CombatCounter(0)
+!AreaType(DUNGEON)
+GlobalTimerExpired("FHFNadiyyaFarenTime","GLOBAL")
+THEN
+RESPONSE #100
+SetGlobal("FHFNadiyyaReact","GLOBAL",1)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+!AreaType(DUNGEON)
+GlobalTimerExpired("FHFNadiyyaFarenTime","GLOBAL")
+Global("FHFNadiyyaReact","GLOBAL",1)
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//Speaking to Nadiyya at the Temple
+
+IF
+InParty(Myself)
+See(Player1)
+AreaCheck("AR5503")
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+See("AMCLER02")
+See("FHFNA25")
+Global("FHFNadiyya","GLOBAL",5)
+Global("FHFNadTemple","GLOBAL",1)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNadTemple","GLOBAL",2)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+AreaCheck("AR5503")
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+See("AMCLER02")
+See("FHFNA25")
+Global("FHFNadTemple","GLOBAL",2)
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END
+
+//Commenting after the Nadiyya quest is resolved
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+Global("FHFNadiyyaFollowup","GLOBAL",0)
+Global("FHFNadiyya","GLOBAL",5)
+OR(3)
+Global("FHFNadThieving","GLOBAL",2)
+Global("FHFNadSettle","GLOBAL",1)
+Global("FHFNadTemple","GLOBAL",3)
+CombatCounter(0)
+!AreaType(DUNGEON)
+AreaCheck("AR5500")
+THEN
+RESPONSE #100
+SetGlobal("FHFNadiyyaFollowup","GLOBAL",1)
+END
+
+IF
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+!AreaType(DUNGEON)
+GlobalTimerExpired("FHFNadiyyaFollowupTime","GLOBAL")
+Global("FHFNadiyyaFollowup","GLOBAL",1)
+THEN
+RESPONSE #100
+PlaySong(0)
+StartDialogueNoSet(Player1)
+END

@@ -1,0 +1,86 @@
+//Conflict talk #1:
+
+IF
+InParty("FHFRN")
+InParty("Nath")
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("NathRomanceActive","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",13)
+Global("FHFNathConflictTimerSet1","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNathConflictTimerSet1","GLOBAL",1)
+RealSetGlobalTimer("FHFNathConflictTimer","GLOBAL",200)
+END
+
+IF
+InParty("FHFRN")
+InParty("Nath")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Nath",CD_STATE_NOTVALID)
+Global("NathRomanceActive","GLOBAL",1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("FHFNathConflictTimerSet1","GLOBAL",1)
+RealGlobalTimerExpired("FHFNathConflictTimer","GLOBAL")
+Global("FHFNathConflict1","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNathConflict1","GLOBAL",1)
+END
+
+//Conflict talk #2
+
+IF
+InParty("FHFRN")
+InParty("Nath")
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("NathRomanceActive","GLOBAL",1)
+Global("FHTalkAvery","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",22)
+Global("FHFNathConflictTimerSet2","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNathConflictTimerSet2","GLOBAL",1)
+RealSetGlobalTimer("FHFNathConflictTimer","GLOBAL",500)
+END
+
+IF
+InParty("FHFRN")
+InParty("Nath")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Nath",CD_STATE_NOTVALID)
+Global("NathRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",1)
+RealGlobalTimerExpired("FHFNathConflictTimer","GLOBAL")
+Global("FHFNathConflictTimerSet2","GLOBAL",1)
+Global("FHFNathConflict2","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFNathConflict2","GLOBAL",1)
+END
+
+IF
+InParty("FHFRN")
+InParty("Nath")
+See(Player1)
+OR(2)
+Global("FHFNathConflict1","GLOBAL",1)
+Global("FHFNathConflict2","GLOBAL",1)
+THEN
+RESPONSE #100
+StartDialogueNoSet(Player1)
+END

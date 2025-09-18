@@ -1,0 +1,9 @@
+//Make Faren recognise what point at the romance we're at
+
+IF
+GlobalGT("EdwinLoveTalk","LOCALS",29)
+Global("FHFEdwinRom","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFEdwinRom","GLOBAL",1)
+END

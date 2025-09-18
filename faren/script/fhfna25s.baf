@@ -1,0 +1,23 @@
+//Moving to Faren
+
+IF
+Global("FHFNadiyya","GLOBAL",0)
+See("FHFRN")
+InParty("FHFRN")
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+THEN
+RESPONSE #100
+SetGlobal("FHFNadiyya","GLOBAL",1)
+MoveToObject("FHFRN")
+StartDialogueNoSet(Player1)
+END
+
+//Escaping after speaking to Faren
+
+IF
+Global("FHFNadiyya","GLOBAL",2)
+THEN
+RESPONSE #100
+SetGlobal("FHFNadiyya","GLOBAL",3)
+EscapeArea()
+END

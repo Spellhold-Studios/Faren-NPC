@@ -1,0 +1,10 @@
+IF
+    InParty(Myself)
+    !Dead("T#Dace")
+    Global("T#DaceIntTalks","GLOBAL",22)
+    Global("T#DaceFriendshipActive","GLOBAL",0)
+    Global("FHFarenRomanceActive","GLOBAL",2)
+THEN
+  RESPONSE #100
+    SetGlobal("T#DaceFriendshipActive","GLOBAL",1)
+END

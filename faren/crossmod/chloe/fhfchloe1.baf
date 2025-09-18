@@ -1,0 +1,72 @@
+//Conflict talk 1:
+
+IF
+InParty("FHFRN")
+InParty("Chloe")
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("ChloeRomanceActiveCR","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",13)
+GlobalLT("FHFarenLoveTalk","GLOBAL",24)
+Global("FHFChloeConflictTimerSet1","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFChloeConflictTimerSet1","GLOBAL",1)
+RealSetGlobalTimer("FHFChloeConflictTimer","GLOBAL",200)
+END
+
+IF
+InParty("FHFRN")
+InParty("Chloe")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Chloe",CD_STATE_NOTVALID)
+Global("ChloeRomanceActiveCR","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",1)
+RealGlobalTimerExpired("FHFChloeConflictTimer","GLOBAL")
+Global("FHFChloeConflictTimerSet1","GLOBAL",1)
+Global("FHFChloeConflict1","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFChloeConflict1","GLOBAL",1)
+END
+
+//Conflict talk 2:
+
+IF
+InParty("FHFRN")
+InParty("Chloe")
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("ChloeRomanceActiveCR","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",22)
+Global("FHFChloeConflictTimerSet2","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFChloeConflictTimerSet2","GLOBAL",1)
+RealSetGlobalTimer("FHFChloeConflictTimer","GLOBAL",500)
+END
+
+IF
+InParty("FHFRN")
+InParty("Chloe")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Chloe",CD_STATE_NOTVALID)
+Global("ChloeRomanceActiveCR","GLOBAL",1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+RealGlobalTimerExpired("FHFChloeConflictTimer","GLOBAL")
+Global("FHFChloeConflictTimerSet2","GLOBAL",1)
+Global("FHFChloeConflict2","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFChloeConflict2","GLOBAL",1)
+END

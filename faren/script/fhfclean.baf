@@ -1,0 +1,31 @@
+//Appending to the statue of Amaunator
+
+//Putting Faren's body in the statue
+
+IF
+Contains("fhfbody",Myself)
+Global("CleanseVampire","AR1401",0)
+THEN
+RESPONSE #100
+SetGlobal("CleanseVampire","AR1401",1)
+END
+
+//Putting all the ingredients in the statue: shiny effects ensue and we have ourselves a boyfriend back!
+
+IF
+Contains("fhfbody",Myself)
+Contains("MISCBP",Myself)
+THEN
+RESPONSE #100
+SetInterrupt(FALSE)
+SetGlobal("CleanseVampire","AR1401",2)
+DestroyItem("fhfbody")
+DestroyItem("MISCBP")
+CreateVisualEffect("SPMETSW2",[2592.1701])
+CreateVisualEffect("SPMETSW2",[2645.1742])
+Wait(1)
+CreateVisualEffect("SPFLESHS",[2565.1677])
+Wait(1)
+MoveGlobal("AR1401","FHFRN",[2565.1677])
+SetInterrupt(TRUE)
+END

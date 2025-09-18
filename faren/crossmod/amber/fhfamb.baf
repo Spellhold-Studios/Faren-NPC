@@ -1,0 +1,55 @@
+//Romance conflict
+
+//Conflict 1
+
+IF
+InParty("FHFRN")
+InParty("M#Amber")
+See(Player1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("M#AmberRomanceActive","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",22)
+Global("FHFAmberConflictTimerSet","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFAmberConflictTimerSet","GLOBAL",1)
+RealSetGlobalTimer("FHFAmberConflictTimer","GLOBAL",200)
+END
+
+IF
+InParty("FHFRN")
+InParty("M#Amber")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck("M#Amber",CD_STATE_NOTVALID)
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+Global("M#AmberRomanceActive","GLOBAL",1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+RealGlobalTimerExpired("FHFAmberConflictTimer","GLOBAL")
+Global("FHFAmberConflictTimerSet","GLOBAL",1)
+Global("FHFAmberConflict","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFAmberConflict","GLOBAL",1)
+END
+
+//Initiating dialogue
+
+IF
+Global("FHFAmberConflict","GLOBAL",1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck("M#Amber",CD_STATE_NOTVALID)
+See(Player1)
+THEN
+RESPONSE #100
+Wait(3)
+SetDialog("m#ambern")
+PlaySong(999997)
+Dialog(Player1)
+END

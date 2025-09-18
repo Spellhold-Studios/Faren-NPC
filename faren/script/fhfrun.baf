@@ -1,0 +1,40 @@
+//Script for Seth's runner
+
+//Moving to Faren
+
+IF
+Global("FHFRunner","GLOBAL",0)
+See("FHFRN")
+InParty("FHFRN")
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+THEN
+RESPONSE #100
+SetGlobal("FHFRunner","GLOBAL",1)
+MoveToObject("FHFRN")
+StartDialogueNoSet(Player1)
+END
+
+//If Faren is unavailable, moving to the PC
+
+IF
+Global("FHFRunner","GLOBAL",0)
+OR(2)
+!See("FHFRN")
+StateCheck("FHFRN",CD_STATE_NOTVALID)
+InParty("FHFRN")
+THEN
+RESPONSE #100
+SetGlobal("FHFRunner","GLOBAL",2)
+MoveToObject(Player1)
+StartDialogueNoSet(Player1)
+END
+
+//Escaping once he's done
+
+IF
+Global("FHFRunner","GLOBAL",3)
+THEN
+RESPONSE #100
+EscapeArea()
+END
+

@@ -1,0 +1,24 @@
+//Linnea's override script
+
+//Killing Linnea
+
+IF
+Die()
+THEN
+RESPONSE #100
+DropInventory()
+DestroySelf()
+END
+
+//Moving after the quest is completed
+
+IF
+Global("FHFTellBrega","GLOBAL",1)
+Global("FHFLinGone","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFLinGone","GLOBAL",1)
+EscapeArea()
+Wait(1)
+DestroySelf()
+END

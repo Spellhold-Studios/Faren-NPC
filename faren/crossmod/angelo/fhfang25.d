@@ -1,0 +1,15 @@
+CHAIN IF ~InParty("FHFRN")
+See("FHFRN")
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+Global("FHFAng25","GLOBAL",0)~ THEN BADANG25 FHFAng25
+@0
+DO ~SetGlobal("FHFAng25","GLOBAL",1)~
+== BFHF25 @1
+== BADANG25 @2
+== BFHF25 @3
+== BFHF25 IF ~InParty("Jan")~ THEN @4
+== BADANG25 IF ~InParty("Jan")~ THEN @5
+== BFHF25 @6
+== BADANG25 @7
+== BFHF25 @8
+EXIT

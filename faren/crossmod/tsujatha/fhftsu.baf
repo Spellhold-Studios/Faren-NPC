@@ -1,0 +1,72 @@
+//Conflict talk 1:
+
+IF
+InParty("FHFRN")
+InParty("Tsujath")
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("TsujathaRomanceActive","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",13)
+GlobalLT("FHFarenLoveTalk","GLOBAL",23)
+Global("FHFTsuConflictTimerSet1","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFTsuConflictTimerSet1","GLOBAL",1)
+RealSetGlobalTimer("FHFTsuConflictTimer","GLOBAL",200)
+END
+
+IF
+InParty("FHFRN")
+InParty("Tsujath")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+!StateCheck("Tsujatha",CD_STATE_NOTVALID)
+Global("TsujathaRomanceActive","GLOBAL",1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("FHFTsuConflictTimerSet1","GLOBAL",1)
+RealGlobalTimerExpired("FHFTsuConflictTimer","GLOBAL")
+Global("FHFTsuConflict1","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFTsuConflict1","GLOBAL",1)
+END
+
+//Conflict talk 2:
+
+IF
+InParty("FHFRN")
+InParty("Tsujath")
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("TsujathaRomanceActive","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",22)
+Global("FHFTsuConflictTimerSet2","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFTsuConflictTimerSet2","GLOBAL",1)
+RealSetGlobalTimer("FHFTsuConflictTimer","GLOBAL",500)
+END
+
+IF
+InParty("FHFRN")
+InParty("Tsujath")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Tsujatha",CD_STATE_NOTVALID)
+Global("TsujathaRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",1)
+RealGlobalTimerExpired("FHFTsuConflictTimer","GLOBAL")
+Global("FHFTsuConflictTimerSet2","GLOBAL",1)
+Global("FHFTsuConflict2","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFTsuConflict2","GLOBAL",1)
+END

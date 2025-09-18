@@ -1,0 +1,94 @@
+//CONTENTS
+//Friendship night talks - tracked
+//Romance night talks - tracked
+//Floating romance talks
+         //Sleeping with Faren
+         //Underdark banter
+
+//Friendship night talks
+
+IF
+InParty(Myself)
+See(Player1)
+Global("FHFarenFriend","GLOBAL",1)
+Global("FHFarenFriendTalk","GLOBAL",15)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+!AreaType(DUNGEON)
+RealGlobalTimerExpired("FHFarenTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+PlaySong(0)
+IncrementGlobal("FHFarenFriendTalk","GLOBAL",1)
+StartDialogueNoSet(Player1)
+END
+
+//Romance night talks
+IF
+InParty(Myself)
+See(Player1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+OR(3)
+Global("FHFarenLoveTalk","GLOBAL",17)
+Global("FHFarenLoveTalk","GLOBAL",19)
+Global("FHFarenLoveTalk","GLOBAL",37)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+!AreaType(DUNGEON)
+RealGlobalTimerExpired("FHFarenTalkTimer","GLOBAL")
+THEN
+RESPONSE #100
+PlaySong(0)
+PlaySound("fhfmus")
+IncrementGlobal("FHFarenLoveTalk","GLOBAL",1)
+StartDialogueNoSet(Player1)
+END
+
+//Floating romance talks
+
+//Sleeping with Faren
+
+IF
+InParty(Myself)
+See(Player1)
+Global("FHFAskSex","GLOBAL",1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+CombatCounter(0)
+!AreaType(DUNGEON)
+THEN
+RESPONSE #100
+PlaySong(0)
+PlaySound("fhfmus")
+SetGlobal("FHFAskSex","GLOBAL",2)
+StartDialogueNoSet(Player1)
+END
+
+//Underdark banter
+
+IF
+InParty(Myself)
+See(Player1)
+CombatCounter(0)
+Global("HadSlayerDream","GLOBAL",1)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+AreaCheck("AR2100")
+!See([NEUTRAL])
+Global("PlayerLooksLikeDrow","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",24)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("FHFarenUDRomTalk","GLOBAL",0)
+THEN
+RESPONSE #100
+PlaySong(0)
+PlaySound("fhfmus")
+SetGlobal("FHFarenUDRomTalk","GLOBAL",1)
+StartDialogueNoSet(Player1)
+END

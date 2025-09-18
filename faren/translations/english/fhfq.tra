@@ -1,0 +1,157 @@
+@0    = ~Good <DAYNIGHT> to you. I trust you won't be bothering the master, here?~
+@1    = ~Athkatla's a good place...if you keep your eye on your purse.~
+@2    = ~Halmar's the best! He says I can go places if I play my cards right.~
+@3    = ~Sometimes I wish I could go back and see my parents...~
+@4    = ~Halmar looks out for me, he does. That's more'n you can say for most folks in this city.~
+@5    = ~Stand away, you. Don't give the master funny looks.~
+@6    = ~I'm bored. Maybe we'll get something interesting to do once the Belka deal goes through...~
+@7    = ~Don't you cross me. I can have you out on the floor in thirty seconds flat.~
+@8    = ~Get away from me, you little sewer rat! You'll think twice about this!~
+@9    = ~Leave it, <PRO_GIRLBOY>. Can't you see I'm busy?~
+@10   = ~Good to see you again, Faren. How've you been keeping, these long months? How long's it been?~
+@11   = ~Spare it, Halmar. What the hell are you doing in Athkatla?~
+@12   = ~What a welcome! Now that's what we in the business call uncouth.~
+@13   = ~Fine, I can tell you're not going to be nice about this. I've got a job for you to do. There's a woman, over with the Council of Six. I need her bagged.~
+@14   = ~Aye? Is that it? What are ye waitin' fer, <CHARNAME>, let's get to it!~
+@15   = ~I cannot believe that we are reduced to these pissant errands. Let us conserve our strength for higher things.~
+@16   = ~<CHARNAME>, this is a repugnant man wishing to harm an innocent woman. Giving him up to the authorities is the just course of action.~
+@17   = ~Vile! Were the Order in charge of the city, such miscreants would not be allowed to fester.~
+@18   = ~You've got to be kidding. I'm not killing anyone!~
+@19   = ~Halmar, how much would you be willing to give for this favour?~
+@20   = ~I really don't think this is the sort of thing I want to do.~
+@21   = ~Say 500 gp. And a letting-up of Faren's debt. What d'you say, Faren? Ready for one last job?~
+@22   = ~<CHARNAME>, you can't be serious. The debt's hardly worth anything, and he's asking you to do an assassination! The guards'll come down on us like a ton of bricks.~
+@23   = ~Which is why you need to be careful. You do remember how to creep around, don't you?~
+@24   = ~That's not the point!~
+@25   = ~Then I'll do it. It doesn't sound like much effort - and besides, I need the cash.~
+@26   = ~I'm not going to do this. It's a terrible thing to do!~
+@27   = ~Steady, steady, before you start getting shirty. Faren owes me. One last job, then we'll call it quits. You do remember how to sneak around, don't you, Faren?~
+@28   = ~Listen, Halmar, how much money would it take for you to forget about this debt?~
+@29   = ~Fine, it looks like I don't have an alternative. Who's this woman?~
+@30   = ~I'm not doing it. You're lucky that I don't report you to the authorities.~
+@31   = ~The name's Linnea Belka, and she's a civil servant over at the Council of Six building. Bring me her head. That'll avoid any misunderstandings. A pleasure doing business with you.~
+@32   = ~Halmar's Mission
+
+It seems that Faren's past dealings are coming back to haunt him. A previous associate, Halmar, has given him - and me - a mission to collect the head of Linnea Belka, who is often seen in the Council of Six building. Faren does not seem overly happy about this state of affairs, but Halmar insists that he owes him a favour.~
+@33   = ~Hah, if I needed money I'd get it elsewhere. No, it's the job or nothing.~
+@34   = ~It seems that I have no alternative, then. Who is the woman?~
+@35   = ~All right, though it seems a lot of effort for not a lot. Where's this woman?~
+@36   = ~I'm not doing this, then. You're lucky that I don't report you to the authorities.~
+@37   = ~No threats, if you please, otherwise Faren might end up in a mess of his own. You want it to be common knowledge who stole those Matzican documents that stopped all them poor sailors getting their pay on time? Or--~
+@38   = ~Shut up, Halmar. That's over now.~
+@39   = ~Not for me, it isn't.~
+@40   = ~I'll be waiting here, if you happen to change your mind.~
+@41   = ~Come on, Faren. Let's leave this man alone.~
+@42   = ~I plan to report you to the Inspector, Halmar, and then you'll be sorry for threatening this woman!~
+@43   = ~Fine, let's go.~
+@44   = ~Halmar's Mission
+
+It seems that Faren's past dealings are coming back to haunt him. A previous associate, Halmar, attempted to collect a debt he was owed. I refused to go along with his plan.~
+@45   = ~I very much think not! I have help, as you see!~
+@46   = ~Halmar's Mission
+
+It seems that Faren has some undesirables in his past. A previous associate, Halmar, attempted to collect a debt he was owed, but he attacked when I threatened to go to the authorities.~
+@47   = ~Did you really think you'd be able to double-cross me like that? Hah, that inspector was bragging all over the place about his precious little informant.~
+@48   = ~But I've got people on my side too, as you see. You won't get away so easily this time!~
+@49   = ~Oh, it's you again. What do you want?~
+@50   = ~Yes. I have her head, here.~
+@51   = ~No, I haven't yet, but I will soon.~
+@52   = ~What did you want me to do, again?~
+@53   = ~Maybe I have changed my mind. What did you want, again?~
+@54   = ~I know I said I wouldn't do it, but here's her head after all.~
+@55   = ~She gave me a better offer. Time to die!~
+@56   = ~Nothing, I was just dropping in.~
+@57   = ~Good to see, good to see. Well, here's that cash you wanted. Pleasure doing business with you.~
+@58   = ~And, Faren, consider that debt of yours wiped. I'll see you sometime around, I'm sure.~
+@59   = ~Not if I see you first.~
+@60   = ~You're a wit, Faren, a wit, as always.~
+@61   = ~Halmar's Mission
+
+It seems that Faren's past dealings are coming back to haunt him. A previous associate, Halmar, attempted to collect a debt he was owed. I refused to go along with his plan, and Halmar seemed disconcertingly unmoved by my refusal.~
+@62   = ~Linnea's Task
+
+Upon speaking with Linnea Belka, I have decided to do a job for her: killing Halmar so that she may be safe - and so that I can collect a reward from her.~
+@63   = ~Halmar's Mission
+
+Linnea is dead, upon Halmar's orders. I can now be free of his politics, and Faren's debt has been erased.~
+@64   = ~Then get to it! I can't hang around here forever - I've got places to be. Remember, she's in the Council of Six building.~
+@65   = ~Do I have to do all the work here? You have to bring me the head of Linnea Belka, an elven woman who hangs around in the Council of Six building. Get to it!~
+@66   = ~Ah, I knew you were a decent <PRO_MANWOMAN> at heart after all.~
+@67   = ~If you remember, you need to bring me Linnea Belka's head. She normally hangs around the Council of Six building in the Government District. I hope to see you soon...~
+@68   = ~Damn it, what's she paying you? I can give you double-- ah, damn it, you're not going to be swayed, are you!~
+@69   = ~Then scram. I don't need you in here cramping my style.~
+@70   = ~If you want some service, I'm afraid you're going to have to wait. It's not like we have nothing to do, here.~
+@71   = ~I've just been enumerating the tax landholds in the colonies... and a ship just arrived from Maztica telling me that three villages have been burned to the ground by the natives! All that work, gone!~
+@72   = ~Um... I have nothing to do with raising the taxes, all right?~
+@73   = ~If you want anything done, you're going to have to speak to the Council. And that, of course, is not easy.~
+@74   = ~Yes, yes, what is it? I'm very busy, you know.~
+@75   = ~I think you should get out of here, Linnea. Your life is in danger.~
+@76   = ~I was wondering if you could step out with me for a moment.~
+@77   = ~Never mind. I don't need anything at the moment.~
+@78   = ~What? Preposterous! What exactly do you think you know?~
+@79   = ~Just step out of here a moment, and I can explain.~
+@80   = ~A man named Halmar hired me to kill you, but I'm not going to do it.~
+@81   = ~A man named Halmar tried to hire me to kill you, but I refused.~
+@82   = ~What? Why would I do that? I've got a lot to do.~
+@83   = ~I have a message for you, and it's of a personal nature.~
+@84   = ~Then kindly leave me be - I've got a great deal of work to do.~
+@85   = ~Well...I suppose it can't hurt...~
+@86   = ~All right. I'll meet you round the side of the building.~
+@87   = ~Halmar?! Then that little rat's still around, is he? Damn it, I thought I'd shaken him off, but obviously not...~
+@88   = ~If you like, I can tell him you weren't here - or give him a different token.~
+@89   = ~I can tell Inspector Brega about it, and then you should be safe.~
+@90   = ~If he's that tenacious, I don't want to annoy him. Sorry, Linnea - time to die!~
+@91   = ~No. If you knew how tenacious he is, you'd know he'll sniff me out... Oh, I wish I'd stayed away from here!~
+@92   = ~All...all right, then. I would have preferred that Halmar be eliminated altogether, but I suppose this is the next best thing.~
+@93   = ~What? No!~
+@94   = ~Listen, if you do me a favour, I can get you a nice reward. Go and kill Halmar for me.~
+@95   = ~I don't think I can do that. I'm not an errand<PRO_BOYGIRL> - I have my own things to do.~
+@96   = ~Very well, I'll do it. What will you give me, then?~
+@97   = ~Is there another alternative? I have no wish to kill anybody.~
+@98   = ~I don't need payment to rid the city of such a scoundrel. I'll be sure to do it.~
+@99   = ~But that means I'll have to leave the city! My work, my friends are all here!~
+@100  = ~Sorry, Linnea. You're on your own.~
+@101  = ~Is there nothing else I can do instead of killing Halmar?~
+@102  = ~Very well, then, if you insist. I will go and kill Halmar for you.~
+@103  = ~I can give you 200gp, if you wish. Please, I need you to do this!~
+@104  = ~I'm afraid that's not enough. You're on your own.~
+@105  = ~Very well. I will do it.~
+@106  = ~Is there no alternative way of dealing with this?~
+@107  = ~Excellent. I have no idea who you are to do such a thing, but you are indeed a good <PRO_MANWOMAN>. Be sure to return here once you've done it.~
+@108  = ~Well...I suppose you could tell the inspector that Halmar's at large. I don't know, I'd much rather he was out of the way, but it's your decision.~
+@109  = ~Very well - I will go and kill Halmar for you.~
+@110  = ~I'll go and talk to the Chief Inspector, then. Farewell.~
+@111  = ~Fine, fine, then I'll leave. I hope you're happy!~
+@112  = ~Now, what is all this?~
+@113  = ~Time to die, Linnea!~
+@114  = ~Well? Is he dead?~
+@115  = ~Yes, he is. You're safe to carry on as you did before.~
+@116  = ~Not yet. I'm on my way to kill him.~
+@117  = ~On second thoughts, his offer was better. Time to die, Linnea!~
+@118  = ~No. I've decided not to do it, after all.~
+@119  = ~Oh, that's excellent news! I can't believe you would do that for me.~
+@120  = ~Here, have this necklace. It's not much, but it's a decent enough reward, I think.~
+@121  = ~Here, have some money. It's not much, but it's a decent enough reward, I think.~
+@122  = ~Thank you again, and farewell.~
+@123  = ~Killing Halmar for Linnea
+
+Halmar is dead, on Linnea's request. I can now be free of their politics, and Faren is no longer in anyone's debt.~
+@124  = ~Then, please, get to it! I'm afraid for my life while I wait here!~
+@125  = ~I have information for you about an attempt on one of your colleagues' lives.~
+@126  = ~Aye? And how would you have come by this information?~
+@127  = ~Never mind that. The fact is that Linnea Belka is in danger.~
+@128  = ~I was assigned by a man named Halmar to kill Linnea Belka, but I'm not going to do it.~
+@129  = ~A man named Halmar wanted me to kill Linnea Belka, but I refused.~
+@130  = ~Hmmm. There seems to be something you're not saying, but Miss Belka has been involved in some...important business, lately.~
+@131  = ~Hmmm. I question the wisdom of associating with such people in the first place, but at least some good can come from it.~
+@132  = ~Truly? Then you are of a stronger will than many I encounter in my work here.~
+@133  = ~I thank you, and I will be sure to tell others of your decent behaviour. This city needs more people like you. In the meantime, Miss Belka will be moved to a place of safety, where undesirables like this Halmar fellow cannot reach her.~
+@134  = ~Reported Halmar to the authorities
+
+I have reported Halmar's dealings to Chief Inspector Brega. With hope, this means that he will not bother me again in the future.~
+@135  = ~I thank you for the information. Miss Belka will be moved to a place of safety, where undesirables like this Halmar fellow cannot reach her.~
+@136  = ~Reported Halmar to the authorities
+
+Instead of murdering Linnea Belka, I have reported Halmar's dealings to Chief Inspector Brega. With hope this will mean that Halmar will not bother me again.~
+
+@200  = ~Halmar's Mission~

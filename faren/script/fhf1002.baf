@@ -1,0 +1,9 @@
+//Appended to Council of Six building to spawn Linnea
+
+IF
+Global("FHFLinSpawn","AR1002",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFLinSpawn","AR1002",1)
+CreateCreature("FHFLIN",[1027.1050],8)
+END

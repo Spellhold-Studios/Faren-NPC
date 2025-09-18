@@ -1,0 +1,40 @@
+//Halmar's override script
+
+//Initiating dialogue on seeing Faren
+
+IF
+InParty("FHFRN")
+See("FHFRN")
+!StateCheck("FHFRN",CD_STATE_NOTVALID)
+Global("FHFHalFaren","GLOBAL",0)
+Global("FHFHalAttacked","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFHalFaren","GLOBAL",1)
+StartDialogueNoSet(Player1)
+END
+
+//Initiating dialogue upon being attacked
+
+IF
+AttackedBy([ANYONE],DEFAULT)
+Global("FHFHalAttacked","GLOBAL",0)
+Global("FHFHalBrega","GLOBAL",0)
+Global("FHFHalEnemy","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFHalAttacked","GLOBAL",1)
+StartDialogueNoSet(Player1)
+END
+
+//Initiating dialogue upon being betrayed
+
+IF
+See(Player1)
+Global("FHFTellBrega","GLOBAL",1)
+Global("FHFHalBrega","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFHalBrega","GLOBAL",1)
+StartDialogueNoSet(Player1)
+END

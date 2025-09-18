@@ -1,0 +1,88 @@
+//Conflict talk 1:
+
+IF
+InParty("FHFRN")
+InParty("Saerileth")
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("SaerilethRomanceActive","GLOBAL",1)
+GlobalLT("FHFarenLoveTalk","GLOBAL",15)
+Global("FHFSaerConflictTimerSet1","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFSaerConflictTimerSet1","GLOBAL",1)
+RealSetGlobalTimer("FHFSaerConflictTimer","GLOBAL",2000)
+END
+
+IF
+InParty("FHFRN")
+InParty("Saerileth")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Saerileth",CD_STATE_NOTVALID)
+Global("SaerilethRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",1)
+RealGlobalTimerExpired("FHFSaerConflictTimer","GLOBAL")
+Global("FHFSaerConflictTimerSet1","GLOBAL",1)
+Global("FHFSaerConflict1","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFSaerConflict1","GLOBAL",1)
+END
+
+//Conflict talk 2
+
+IF
+InParty("FHFRN")
+InParty("Saerileth")
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("SaerilethRomanceActive","GLOBAL",1)
+GlobalGT("FHFarenLoveTalk","GLOBAL",14)
+Global("FHFSaerConflictTimerSet2","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("FHFSaerConflictTimerSet2","GLOBAL",1)
+RealSetGlobalTimer("FHFSaerConflictTimer","GLOBAL",500)
+END
+
+IF
+InParty("FHFRN")
+InParty("Saerileth")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Saerileth",CD_STATE_NOTVALID)
+Global("SaerilethRomanceActive","GLOBAL",1)
+OR(2)
+Global("FHFarenRomanceActive","GLOBAL",1)
+Global("FHFarenRomanceActive","GLOBAL",2)
+Global("FHFSaerConflictTimerSet2","GLOBAL",1)
+RealGlobalTimerExpired("FHFSaerConflictTimer","GLOBAL")
+Global("FHFSaerConflict2","GLOBAL",0)
+!AreaType(DUNGEON)
+CombatCounter(0)
+THEN
+RESPONSE #100
+SetGlobal("FHFSaerConflict2","GLOBAL",1)
+END
+
+//Initiating talks
+
+IF
+InParty("FHFRN")
+InParty("Saerileth")
+See(Player1)
+!StateCheck(Player1,CD_STATE_NOTVALID)
+!StateCheck(Myself,CD_STATE_NOTVALID)
+!StateCheck("Saerileth",CD_STATE_NOTVALID)
+OR(2)
+Global("FHFSaerConflict1","GLOBAL",1)
+Global("FHFSaerConflict2","GLOBAL",1)
+THEN
+RESPONSE #100
+StartDialogueNoSet(Player1)
+END
